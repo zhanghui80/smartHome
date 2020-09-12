@@ -1,0 +1,2856 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               21/Dec/2019  19:46:02
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+#    Command line       =  
+#        -f C:\Users\17245\AppData\Local\Temp\EWF13F.tmp
+#        (D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+#        -D NWK_AUTO_POLL -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC
+#        -D LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+#        -lA
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_TX_DATA_MAX=3
+#        -DMAC_CFG_TX_MAX=6 -DMAC_CFG_RX_MAX=3) -f
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List\Infra-red.lst
+#    Object file        =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj\Infra-red.r51
+#
+###############################################################################
+
+D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+      1          #include "Infrared.h"
+      2          #include "iocc2530.h"
+      3          #include <string.h>
+      4          #include "OSAL.h"
+      5          #include "AF.h"
+      6          #include "ZDApp.h"
+      7          #include "ZDObject.h"
+      8          #include "ZDProfile.h"
+      9          #include <string.h>
+     10          #include "Coordinator.h"
+     11          #include "DebugTrace.h"
+     12          #include "Sensor.h"
+     13          #include "Infrared.h"
+     14          #if !defined( WIN32 )
+     15            #include "OnBoard.h"
+     16          #endif
+     17          
+     18          /* HAL */
+     19          #include "hal_lcd.h"
+     20          #include "hal_led.h"
+     21          #include "hal_key.h"
+     22          #include "hal_uart.h"
+     23          
+     24          /*
+     25          
+     26          int AC_off[236] = { FD FD 30 03 40 17 00 34 1D 01 33 02 68 00 24 00 22 00 24 00 EE 04 25 00 DA 09 24 00 00 00 21 00 FF FF FF FF FF FF FF FF 01 22 21 11 21 22 12 22 22 22 21 12 22 22 21 21 22 12 31 22 21 22 22 22 22 22 22 22 22 22 22 22 21 21 24 01 22 21 11 21 22 12 22 22 22 21 12 22 22 21 11 22 12 32 22 22 22 22 22 22 22 22 22 21 21 22 22 21 22 15 00 00 F0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+     27          00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 76 3F D3 DF DF
+     28          
+     29          };*/
+     30          
+     31          
+     32          
+     33          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     34          uint8 AC_on[236] = { 
+   \                     AC_on:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_on>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+     35          0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1D ,0X01 ,0X33 ,
+     36          0X02 ,0X69 ,0X00 ,0X25 ,0X00 ,0X21 ,0X00 ,0X26 ,0X00 ,0XEF ,0X04 ,0X25 ,0X00 ,0XDE ,
+     37          0X09 ,0X25 ,0X00 ,0X00 ,0X00 ,0X21 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+     38          0XFF ,0X01 ,0X22 ,0X11 ,0X11 ,0X22 ,0X12 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,
+     39          0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+     40          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X11 ,0X24 ,0X01 ,0X22 ,0X11 ,0X11 ,0X22 ,0X12 ,
+     41          0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,0X22 ,
+     42          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X22 ,0X22 ,0X12 ,
+     43          0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     44          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     45          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     46          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     47          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     48          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     49          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     50          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     51          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X08 ,0X76 ,0X00 ,0XD1 ,0XDF ,
+     52          0XDF
+     53          };
+     54          
+     55          /****关闭***/
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     56          uint8 AC_off[236] = {
+   \                     AC_off:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_off>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+     57          0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1D ,0X01 ,0X33 ,
+     58          0X02 ,0X68 ,0X00 ,0X24 ,0X00 ,0X22 ,0X00 ,0X24 ,0X00 ,0XEE ,0X04 ,0X25 ,0X00 ,0XDA ,
+     59          0X09 ,0X24 ,0X00 ,0X00 ,0X00 ,0X21 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+     60          0XFF ,0X01 ,0X22 ,0X21 ,0X11 ,0X21 ,0X22 ,0X12 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,
+     61          0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+     62          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X24 ,0X01 ,0X22 ,0X21 ,0X11 ,0X21 ,0X22 ,
+     63          0X12 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,0X22 ,
+     64          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X22 ,0X21 ,0X22 ,
+     65          0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     66          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     67          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     68          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     69          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     70          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     71          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     72          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+     73          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X06 ,0X76 ,0X3F ,0XD3 ,0XDF ,
+     74          0XDF
+     75          };
+     76          
+     77          /*
+     78          uint8 AC_zl_16[236] = {
+     79          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1A,0X01,0X35,0X02,0X68,0X00,0X26,0X00,
+     80          0X24,0X00,0X24,0X00,0XED,0X04,0X25,0X00,0XDC,0X09,0X25,0X00,0X1C,0X01,0X36,0X02,
+     81          0X00,0X00,0X20,0X00,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X22,0X22,0X22,0X22,
+     82          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+     83          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X24,0X51,0X22,0X12,0X21,0X22,
+     84          0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+     85          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X12,0X26,0X00,0X00,
+     86          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     87          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     88          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     89          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     90          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     91          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     92          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+     93          0X00,0X00,0X00,0X00,0X00,0X00,0X05,0X76,0X01,0X27,0XDF,0XDF
+     94          };
+     95          
+     96          
+     97          uint8 AC_zl_17[236] = {
+     98          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+     99          0X24,0X00,0X24,0X00,0XEC,0X04,0X24,0X00,0XDB,0X09,0X25,0X00,0X00,0X00,0X20,0X00,
+    100          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X21,0X22,0X22,0X22,
+    101          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    102          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X24,0X01,0X22,0X12,0X21,0X21,
+    103          0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    104          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X25,0X00,0X00,
+    105          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    106          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    107          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    108          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    109          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    110          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    111          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    112          0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X3F,0X9B,0XDF,0XDF
+    113          };
+    114          
+    115          
+    116          uint8 AC_zl_18[236] = {
+    117          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+    118          0X22,0X00,0X25,0X00,0XEC,0X04,0X25,0X00,0XD8,0X09,0X25,0X00,0X00,0X00,0X21,0X00,
+    119          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X22,0X12,0X22,0X22,
+    120          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    121          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X11,0X24,0X01,0X22,0X12,0X21,0X22,
+    122          0X12,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    123          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X25,0X00,0X00,
+    124          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    125          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    126          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    127          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    128          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    129          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    130          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    131          0X00,0X00,0X00,0X00,0X00,0X00,0X04,0X76,0X01,0XA2,0XDF,0XDF
+    132          };
+    133          
+    134          
+    135          uint8 AC_zl_19[236] = {
+    136          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X31,0X02,0X69,0X00,0X26,0X00,
+    137          0X23,0X00,0X24,0X00,0XEE,0X04,0X24,0X00,0XDA,0X09,0X26,0X00,0X00,0X00,0X22,0X00,
+    138          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X12,0X22,0X22,
+    139          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    140          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X11,0X24,0X01,0X22,0X11,0X21,0X21,
+    141          0X12,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    142          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X11,0X25,0X00,0X00,
+    143          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    144          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    145          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    146          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    147          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    148          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    149          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    150          0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X3E,0X60,0XDF,0XDF
+    151          };
+    152          
+    153          */
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    154          uint8 AC_zl_20[236] = {
+   \                     AC_zl_20:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_20>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    155          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X32,0X02,0X68,0X00,0X26,0X00,
+    156          0X21,0X00,0X24,0X00,0XEC,0X04,0X24,0X00,0XD9,0X09,0X24,0X00,0X00,0X00,0X20,0X00,
+    157          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X21,0X22,0X22,
+    158          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    159          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X14,0X01,0X22,0X11,0X21,0X22,
+    160          0X21,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    161          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X22,0X15,0X00,0X00,
+    162          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    163          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    164          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    165          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    166          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    167          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    168          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    169          0X00,0X00,0X00,0X00,0X00,0X00,0X04,0X76,0X3F,0XAE,0XDF,0XDF
+    170          };
+    171          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    172          uint8 AC_zl_21[236] = {
+   \                     AC_zl_21:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_21>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    173          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1A,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+    174          0X23,0X00,0X24,0X00,0XEF,0X04,0X24,0X00,0XDA,0X09,0X26,0X00,0X00,0X00,0X22,0X00,
+    175          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X21,0X22,0X22,
+    176          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    177          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X14,0X01,0X22,0X11,0X21,0X21,
+    178          0X21,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    179          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X22,0X15,0X00,0X00,
+    180          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    181          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    182          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    183          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    184          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    185          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    186          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    187          0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X76,0X00,0X71,0XDF,0XDF
+    188          };
+    189          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    190          uint8 AC_zl_22[236] = {
+   \                     AC_zl_22:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_22>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    191          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+    192          0X23,0X00,0X24,0X00,0XEE,0X04,0X24,0X00,0XDB,0X09,0X24,0X00,0X00,0X00,0X21,0X00,
+    193          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X11,0X22,0X22,
+    194          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    195          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X14,0X01,0X22,0X11,0X21,0X22,
+    196          0X11,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    197          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X12,0X15,0X00,0X00,
+    198          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    199          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    200          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    201          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    202          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    203          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    204          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    205          0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X75,0X00,0X4B,0XDF,0XDF
+    206          };
+    207          
+    208          /***制冷模式23度***/
+    209          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    210          uint8 AC_zl_23[236]  = {
+   \                     AC_zl_23:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_23>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    211          0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1A ,0X01 ,
+    212          0X33 ,0X02 ,0X68 ,0X00 ,0X26 ,0X00 ,0X23 ,0X00 ,0X24 ,0X00 ,0XEF ,0X04 ,0X24 ,0X00 ,
+    213          0XDA ,0X09 ,0X26 ,0X00 ,0X00 ,0X00 ,0X22 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+    214          0XFF ,0XFF ,0X01 ,0X22 ,0X11 ,0X21 ,0X21 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X12 ,
+    215          0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+    216          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X22 ,0X14 ,0X01 ,0X22 ,0X11 ,0X21 ,0X21 ,
+    217          0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,
+    218          0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X21 ,
+    219          0X22 ,0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    220          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    221          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    222          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    223          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    224          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    225          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    226          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+    227          0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X08 ,0X76 ,0X00 ,0X71 ,
+    228          0XDF ,0XDF
+    229          };
+    230          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    231          uint8 AC_zl_24[236] = {
+   \                     AC_zl_24:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_24>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    232          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X31,0X02,0X69,0X00,0X26,0X00,
+    233          0X22,0X00,0X24,0X00,0XED,0X04,0X24,0X00,0XDA,0X09,0X25,0X00,0X00,0X00,0X21,0X00,
+    234          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X22,0X12,0X22,
+    235          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    236          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X14,0X01,0X22,0X11,0X21,0X22,
+    237          0X22,0X12,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    238          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X21,0X15,0X00,0X00,
+    239          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    240          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    241          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    242          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    243          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    244          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    245          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    246          0X00,0X00,0X00,0X00,0X00,0X00,0X06,0X76,0X00,0X0E,0XDF,0XDF
+    247          };
+    248          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    249          uint8 AC_zl_25[236] = {
+   \                     AC_zl_25:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_25>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    250          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1C,0X01,0X32,0X02,0X69,0X00,0X26,0X00,
+    251          0X22,0X00,0X25,0X00,0XEE,0X04,0X24,0X00,0XDA,0X09,0X24,0X00,0X00,0X00,0X20,0X00,
+    252          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X22,0X12,0X22,
+    253          0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+    254          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X14,0X01,0X22,0X11,0X21,0X21,
+    255          0X22,0X12,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+    256          0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X21,0X15,0X00,0X00,
+    257          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    258          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    259          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    260          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    261          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    262          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    263          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    264          0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X75,0X3E,0X41,0XDF,0XDF 
+    265          };
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    266          uint8 AC_zl_26[236] = {
+   \                     AC_zl_26:
+   \   000000                DS 236
+   \   0000EC                REQUIRE `?<Initializer for AC_zl_26>`
+   \   0000EC                REQUIRE __INIT_XDATA_I
+    267          0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1C,0X01,0X33,0X02,0X23,0X00,0X26,0X00, 
+    268          0X6A,0X00,0X25,0X00,0XEE,0X04,0X24,0X00,0XDD,0X09,0X24,0X00,0X00,0X00,0X21,0X00, 
+    269          0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X12,0X21,0X11,0X11,0X21,0X21,0X11, 
+    270          0X11,0X11,0X11,0X21,0X11,0X11,0X12,0X12,0X11,0X21,0X31,0X11,0X11,0X11,0X11,0X11, 
+    271          0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X21,0X11,0X14,0X01,0X12,0X21,0X11,0X11, 
+    272          0X21,0X21,0X11,0X11,0X11,0X11,0X21,0X11,0X11,0X12,0X22,0X11,0X21,0X31,0X11,0X11,
+    273          0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X15,0X00,0X00, 
+    274          0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    275          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+    276          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    277          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    278          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    279          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    280          0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+    281          0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X01,0X48,0XDF,0XDF                
+    282          };
+    283          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    284          static int c2 = 0;
+   \                     c2:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+    285          int off = 0;
+   \                     off:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+    286          
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+    287          uint8* TP[12] = {
+   \                     TP:
+   \   000000                DS 24
+   \   000018                REQUIRE `?<Initializer for TP>`
+   \   000018                REQUIRE __INIT_XDATA_I
+    288          /*AC_zl_17,AC_zl_18,AC_zl_19,**/AC_zl_20,AC_zl_21,
+    289          AC_zl_22,AC_zl_23,AC_zl_24,AC_zl_25,AC_zl_26
+    290          };
+    291          
+    292          
+    293          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    294          void Air_conditioner_on(int a)  //开启
+   \                     Air_conditioner_on:
+    295          {
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    296          
+    297            if(a == 1)
+   \   000004   7401         MOV       A,#0x1
+   \   000006   6A           XRL       A,R2
+   \   000007   4B           ORL       A,R3
+   \   000008   700D         JNZ       ??Air_conditioner_on_0
+    298            {
+    299              HalUARTWrite(0,(uint8*)AC_on,236);
+   \   00000A                ; Setup parameters for call to function HalUARTWrite
+   \   00000A   7CEC         MOV       R4,#-0x14
+   \   00000C   7D00         MOV       R5,#0x0
+   \   00000E   7A..         MOV       R2,#AC_on & 0xff
+   \   000010   7B..         MOV       R3,#(AC_on >> 8) & 0xff
+   \   000012   7900         MOV       R1,#0x0
+   \   000014   12....       LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+    300            }
+    301          
+    302          }
+   \                     ??Air_conditioner_on_0:
+   \   000017                REQUIRE ?Subroutine0
+   \   000017                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   D083         POP       DPH
+   \   000002   D082         POP       DPL
+   \   000004   02....       LJMP      ?BRET
+    303          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    304          void Air_conditioner_off(int a)  //关闭
+   \                     Air_conditioner_off:
+    305          { 
+   \   000000   C082         PUSH      DPL
+   \   000002   C083         PUSH      DPH
+   \   000004                ; Saved register size: 2
+   \   000004                ; Auto size: 0
+    306            
+    307            if(a == 0 && off  == 0)
+   \   000004   EA           MOV       A,R2
+   \   000005   4B           ORL       A,R3
+   \   000006   7028         JNZ       ??Air_conditioner_off_0
+   \   000008   90....       MOV       DPTR,#off
+   \   00000B   E0           MOVX      A,@DPTR
+   \   00000C   F8           MOV       R0,A
+   \   00000D   A3           INC       DPTR
+   \   00000E   E0           MOVX      A,@DPTR
+   \   00000F   F9           MOV       R1,A
+   \   000010   E8           MOV       A,R0
+   \   000011   49           ORL       A,R1
+   \   000012   701C         JNZ       ??Air_conditioner_off_0
+    308            {
+    309              HalUARTWrite(0,(uint8*)AC_off,236);
+   \   000014                ; Setup parameters for call to function HalUARTWrite
+   \   000014   7CEC         MOV       R4,#-0x14
+   \   000016   7D00         MOV       R5,#0x0
+   \   000018   7A..         MOV       R2,#AC_off & 0xff
+   \   00001A   7B..         MOV       R3,#(AC_off >> 8) & 0xff
+   \   00001C   7900         MOV       R1,#0x0
+   \   00001E   12....       LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+    310              off = 1;
+   \   000021   90....       MOV       DPTR,#off
+   \   000024   7401         MOV       A,#0x1
+   \   000026   F0           MOVX      @DPTR,A
+   \   000027   A3           INC       DPTR
+   \   000028   E4           CLR       A
+   \   000029   F0           MOVX      @DPTR,A
+    311              c2 = 0;
+   \   00002A   90....       MOV       DPTR,#c2
+   \   00002D   F0           MOVX      @DPTR,A
+   \   00002E   A3           INC       DPTR
+   \   00002F   F0           MOVX      @DPTR,A
+    312            }
+    313            
+    314          }
+   \                     ??Air_conditioner_off_0:
+   \   000030   80..         SJMP      ?Subroutine0
+    315          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    316          void Air_conditioner_control(int TP1)  //温度控制
+   \                     Air_conditioner_control:
+    317          {
+   \   000000   74F7         MOV       A,#-0x9
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 9
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV       A,R2
+   \   000006   FE           MOV       R6,A
+   \   000007   EB           MOV       A,R3
+   \   000008   FF           MOV       R7,A
+    318            int c1 = TP1;
+    319            
+    320            if(c1 != c2)
+   \   000009   90....       MOV       DPTR,#c2
+   \   00000C   E0           MOVX      A,@DPTR
+   \   00000D   6E           XRL       A,R6
+   \   00000E   7003         JNZ       ??Air_conditioner_control_0
+   \   000010   A3           INC       DPTR
+   \   000011   E0           MOVX      A,@DPTR
+   \   000012   6F           XRL       A,R7
+   \                     ??Air_conditioner_control_0:
+   \   000013   602D         JZ        ??Air_conditioner_control_1
+    321            {
+    322              
+    323              HalUARTWrite(0,(uint8*)TP[TP1-20],236);
+   \   000015                ; Setup parameters for call to function HalUARTWrite
+   \   000015   7CEC         MOV       R4,#-0x14
+   \   000017   7D00         MOV       R5,#0x0
+   \   000019   EA           MOV       A,R2
+   \   00001A   2A           ADD       A,R2
+   \   00001B   F8           MOV       R0,A
+   \   00001C   EB           MOV       A,R3
+   \   00001D   33           RLC       A
+   \   00001E   F9           MOV       R1,A
+   \   00001F   74..         MOV       A,#(TP + 216) & 0xff
+   \   000021   28           ADD       A,R0
+   \   000022   F582         MOV       DPL,A
+   \   000024   74..         MOV       A,#((TP - 40) >> 8) & 0xff
+   \   000026   39           ADDC      A,R1
+   \   000027   F583         MOV       DPH,A
+   \   000029   E0           MOVX      A,@DPTR
+   \   00002A   FA           MOV       R2,A
+   \   00002B   A3           INC       DPTR
+   \   00002C   E0           MOVX      A,@DPTR
+   \   00002D   FB           MOV       R3,A
+   \   00002E   7900         MOV       R1,#0x0
+   \   000030   12....       LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+    324              c2 = c1;
+   \   000033   90....       MOV       DPTR,#c2
+   \   000036   EE           MOV       A,R6
+   \   000037   F0           MOVX      @DPTR,A
+   \   000038   A3           INC       DPTR
+   \   000039   EF           MOV       A,R7
+   \   00003A   F0           MOVX      @DPTR,A
+    325              off = 0;
+   \   00003B   90....       MOV       DPTR,#off
+   \   00003E   E4           CLR       A
+   \   00003F   F0           MOVX      @DPTR,A
+   \   000040   A3           INC       DPTR
+   \   000041   F0           MOVX      @DPTR,A
+    326            }
+    327            
+    328          }
+   \                     ??Air_conditioner_control_1:
+   \   000042   7F01         MOV       R7,#0x1
+   \   000044   02....       LJMP      ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_on>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1D           DB 29
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   69           DB 105
+   \   00000D   00           DB 0
+   \   00000E   25           DB 37
+   \   00000F   00           DB 0
+   \   000010   21           DB 33
+   \   000011   00           DB 0
+   \   000012   26           DB 38
+   \   000013   00           DB 0
+   \   000014   EF           DB 239
+   \   000015   04           DB 4
+   \   000016   25           DB 37
+   \   000017   00           DB 0
+   \   000018   DE           DB 222
+   \   000019   09           DB 9
+   \   00001A   25           DB 37
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   21           DB 33
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   11           DB 17
+   \   00002C   22           DB 34
+   \   00002D   12           DB 18
+   \   00002E   22           DB 34
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   21           DB 33
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   22           DB 34
+   \   000049   11           DB 17
+   \   00004A   24           DB 36
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   11           DB 17
+   \   00004F   22           DB 34
+   \   000050   12           DB 18
+   \   000051   22           DB 34
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   21           DB 33
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   21           DB 33
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   22           DB 34
+   \   00006C   12           DB 18
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   08           DB 8
+   \   0000E7   76           DB 118
+   \   0000E8   00           DB 0
+   \   0000E9   D1           DB 209
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_off>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1D           DB 29
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   68           DB 104
+   \   00000D   00           DB 0
+   \   00000E   24           DB 36
+   \   00000F   00           DB 0
+   \   000010   22           DB 34
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   EE           DB 238
+   \   000015   04           DB 4
+   \   000016   25           DB 37
+   \   000017   00           DB 0
+   \   000018   DA           DB 218
+   \   000019   09           DB 9
+   \   00001A   24           DB 36
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   21           DB 33
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   21           DB 33
+   \   00002B   11           DB 17
+   \   00002C   21           DB 33
+   \   00002D   22           DB 34
+   \   00002E   12           DB 18
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   21           DB 33
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   21           DB 33
+   \   000049   21           DB 33
+   \   00004A   24           DB 36
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   21           DB 33
+   \   00004E   11           DB 17
+   \   00004F   21           DB 33
+   \   000050   22           DB 34
+   \   000051   12           DB 18
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   21           DB 33
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   21           DB 33
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   21           DB 33
+   \   00006C   22           DB 34
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   06           DB 6
+   \   0000E7   76           DB 118
+   \   0000E8   3F           DB 63
+   \   0000E9   D3           DB 211
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_20>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1B           DB 27
+   \   000009   01           DB 1
+   \   00000A   32           DB 50
+   \   00000B   02           DB 2
+   \   00000C   68           DB 104
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   21           DB 33
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   EC           DB 236
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   D9           DB 217
+   \   000019   09           DB 9
+   \   00001A   24           DB 36
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   20           DB 32
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   22           DB 34
+   \   00002D   21           DB 33
+   \   00002E   22           DB 34
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   22           DB 34
+   \   000049   22           DB 34
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   22           DB 34
+   \   000050   21           DB 33
+   \   000051   22           DB 34
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   22           DB 34
+   \   00006C   22           DB 34
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   04           DB 4
+   \   0000E7   76           DB 118
+   \   0000E8   3F           DB 63
+   \   0000E9   AE           DB 174
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_21>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1A           DB 26
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   68           DB 104
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   23           DB 35
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   EF           DB 239
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DA           DB 218
+   \   000019   09           DB 9
+   \   00001A   26           DB 38
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   22           DB 34
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   21           DB 33
+   \   00002D   21           DB 33
+   \   00002E   22           DB 34
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   21           DB 33
+   \   000049   22           DB 34
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   21           DB 33
+   \   000050   21           DB 33
+   \   000051   22           DB 34
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   21           DB 33
+   \   00006C   22           DB 34
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   08           DB 8
+   \   0000E7   76           DB 118
+   \   0000E8   00           DB 0
+   \   0000E9   71           DB 113
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_22>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1B           DB 27
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   68           DB 104
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   23           DB 35
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   EE           DB 238
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DB           DB 219
+   \   000019   09           DB 9
+   \   00001A   24           DB 36
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   21           DB 33
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   22           DB 34
+   \   00002D   11           DB 17
+   \   00002E   22           DB 34
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   22           DB 34
+   \   000049   12           DB 18
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   22           DB 34
+   \   000050   11           DB 17
+   \   000051   22           DB 34
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   22           DB 34
+   \   00006C   12           DB 18
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   08           DB 8
+   \   0000E7   75           DB 117
+   \   0000E8   00           DB 0
+   \   0000E9   4B           DB 75
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_23>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1A           DB 26
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   68           DB 104
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   23           DB 35
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   EF           DB 239
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DA           DB 218
+   \   000019   09           DB 9
+   \   00001A   26           DB 38
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   22           DB 34
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   21           DB 33
+   \   00002D   21           DB 33
+   \   00002E   22           DB 34
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   21           DB 33
+   \   000049   22           DB 34
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   21           DB 33
+   \   000050   21           DB 33
+   \   000051   22           DB 34
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   21           DB 33
+   \   00006C   22           DB 34
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   08           DB 8
+   \   0000E7   76           DB 118
+   \   0000E8   00           DB 0
+   \   0000E9   71           DB 113
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_24>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1B           DB 27
+   \   000009   01           DB 1
+   \   00000A   31           DB 49
+   \   00000B   02           DB 2
+   \   00000C   69           DB 105
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   22           DB 34
+   \   000011   00           DB 0
+   \   000012   24           DB 36
+   \   000013   00           DB 0
+   \   000014   ED           DB 237
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DA           DB 218
+   \   000019   09           DB 9
+   \   00001A   25           DB 37
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   21           DB 33
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   22           DB 34
+   \   00002D   22           DB 34
+   \   00002E   12           DB 18
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   22           DB 34
+   \   000049   21           DB 33
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   22           DB 34
+   \   000050   22           DB 34
+   \   000051   12           DB 18
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   22           DB 34
+   \   00006C   21           DB 33
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   06           DB 6
+   \   0000E7   76           DB 118
+   \   0000E8   00           DB 0
+   \   0000E9   0E           DB 14
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_25>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1C           DB 28
+   \   000009   01           DB 1
+   \   00000A   32           DB 50
+   \   00000B   02           DB 2
+   \   00000C   69           DB 105
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   22           DB 34
+   \   000011   00           DB 0
+   \   000012   25           DB 37
+   \   000013   00           DB 0
+   \   000014   EE           DB 238
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DA           DB 218
+   \   000019   09           DB 9
+   \   00001A   24           DB 36
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   20           DB 32
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   22           DB 34
+   \   00002A   11           DB 17
+   \   00002B   21           DB 33
+   \   00002C   21           DB 33
+   \   00002D   22           DB 34
+   \   00002E   12           DB 18
+   \   00002F   22           DB 34
+   \   000030   22           DB 34
+   \   000031   22           DB 34
+   \   000032   22           DB 34
+   \   000033   12           DB 18
+   \   000034   22           DB 34
+   \   000035   22           DB 34
+   \   000036   21           DB 33
+   \   000037   21           DB 33
+   \   000038   22           DB 34
+   \   000039   12           DB 18
+   \   00003A   31           DB 49
+   \   00003B   22           DB 34
+   \   00003C   21           DB 33
+   \   00003D   22           DB 34
+   \   00003E   22           DB 34
+   \   00003F   22           DB 34
+   \   000040   22           DB 34
+   \   000041   22           DB 34
+   \   000042   22           DB 34
+   \   000043   22           DB 34
+   \   000044   22           DB 34
+   \   000045   22           DB 34
+   \   000046   22           DB 34
+   \   000047   22           DB 34
+   \   000048   21           DB 33
+   \   000049   21           DB 33
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   22           DB 34
+   \   00004D   11           DB 17
+   \   00004E   21           DB 33
+   \   00004F   21           DB 33
+   \   000050   22           DB 34
+   \   000051   12           DB 18
+   \   000052   22           DB 34
+   \   000053   22           DB 34
+   \   000054   22           DB 34
+   \   000055   22           DB 34
+   \   000056   12           DB 18
+   \   000057   22           DB 34
+   \   000058   22           DB 34
+   \   000059   21           DB 33
+   \   00005A   11           DB 17
+   \   00005B   22           DB 34
+   \   00005C   12           DB 18
+   \   00005D   32           DB 50
+   \   00005E   22           DB 34
+   \   00005F   22           DB 34
+   \   000060   22           DB 34
+   \   000061   22           DB 34
+   \   000062   22           DB 34
+   \   000063   22           DB 34
+   \   000064   22           DB 34
+   \   000065   22           DB 34
+   \   000066   22           DB 34
+   \   000067   21           DB 33
+   \   000068   22           DB 34
+   \   000069   22           DB 34
+   \   00006A   22           DB 34
+   \   00006B   21           DB 33
+   \   00006C   21           DB 33
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   08           DB 8
+   \   0000E7   75           DB 117
+   \   0000E8   3E           DB 62
+   \   0000E9   41           DB 65
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AC_zl_26>`:
+   \   000000   FD           DB 253
+   \   000001   FD           DB 253
+   \   000002   30           DB 48
+   \   000003   03           DB 3
+   \   000004   40           DB 64
+   \   000005   17           DB 23
+   \   000006   00           DB 0
+   \   000007   34           DB 52
+   \   000008   1C           DB 28
+   \   000009   01           DB 1
+   \   00000A   33           DB 51
+   \   00000B   02           DB 2
+   \   00000C   23           DB 35
+   \   00000D   00           DB 0
+   \   00000E   26           DB 38
+   \   00000F   00           DB 0
+   \   000010   6A           DB 106
+   \   000011   00           DB 0
+   \   000012   25           DB 37
+   \   000013   00           DB 0
+   \   000014   EE           DB 238
+   \   000015   04           DB 4
+   \   000016   24           DB 36
+   \   000017   00           DB 0
+   \   000018   DD           DB 221
+   \   000019   09           DB 9
+   \   00001A   24           DB 36
+   \   00001B   00           DB 0
+   \   00001C   00           DB 0
+   \   00001D   00           DB 0
+   \   00001E   21           DB 33
+   \   00001F   00           DB 0
+   \   000020   FF           DB 255
+   \   000021   FF           DB 255
+   \   000022   FF           DB 255
+   \   000023   FF           DB 255
+   \   000024   FF           DB 255
+   \   000025   FF           DB 255
+   \   000026   FF           DB 255
+   \   000027   FF           DB 255
+   \   000028   01           DB 1
+   \   000029   12           DB 18
+   \   00002A   21           DB 33
+   \   00002B   11           DB 17
+   \   00002C   11           DB 17
+   \   00002D   21           DB 33
+   \   00002E   21           DB 33
+   \   00002F   11           DB 17
+   \   000030   11           DB 17
+   \   000031   11           DB 17
+   \   000032   11           DB 17
+   \   000033   21           DB 33
+   \   000034   11           DB 17
+   \   000035   11           DB 17
+   \   000036   12           DB 18
+   \   000037   12           DB 18
+   \   000038   11           DB 17
+   \   000039   21           DB 33
+   \   00003A   31           DB 49
+   \   00003B   11           DB 17
+   \   00003C   11           DB 17
+   \   00003D   11           DB 17
+   \   00003E   11           DB 17
+   \   00003F   11           DB 17
+   \   000040   11           DB 17
+   \   000041   11           DB 17
+   \   000042   11           DB 17
+   \   000043   11           DB 17
+   \   000044   11           DB 17
+   \   000045   11           DB 17
+   \   000046   11           DB 17
+   \   000047   11           DB 17
+   \   000048   21           DB 33
+   \   000049   11           DB 17
+   \   00004A   14           DB 20
+   \   00004B   01           DB 1
+   \   00004C   12           DB 18
+   \   00004D   21           DB 33
+   \   00004E   11           DB 17
+   \   00004F   11           DB 17
+   \   000050   21           DB 33
+   \   000051   21           DB 33
+   \   000052   11           DB 17
+   \   000053   11           DB 17
+   \   000054   11           DB 17
+   \   000055   11           DB 17
+   \   000056   21           DB 33
+   \   000057   11           DB 17
+   \   000058   11           DB 17
+   \   000059   12           DB 18
+   \   00005A   22           DB 34
+   \   00005B   11           DB 17
+   \   00005C   21           DB 33
+   \   00005D   31           DB 49
+   \   00005E   11           DB 17
+   \   00005F   11           DB 17
+   \   000060   11           DB 17
+   \   000061   11           DB 17
+   \   000062   11           DB 17
+   \   000063   11           DB 17
+   \   000064   11           DB 17
+   \   000065   11           DB 17
+   \   000066   11           DB 17
+   \   000067   11           DB 17
+   \   000068   11           DB 17
+   \   000069   11           DB 17
+   \   00006A   11           DB 17
+   \   00006B   11           DB 17
+   \   00006C   11           DB 17
+   \   00006D   15           DB 21
+   \   00006E   00           DB 0
+   \   00006F   00           DB 0
+   \   000070   F0           DB 240
+   \   000071   00           DB 0
+   \   000072   00           DB 0
+   \   000073   00           DB 0
+   \   000074   00           DB 0
+   \   000075   00           DB 0
+   \   000076   00           DB 0
+   \   000077   00           DB 0
+   \   000078   00           DB 0
+   \   000079   00           DB 0
+   \   00007A   00           DB 0
+   \   00007B   00           DB 0
+   \   00007C   00           DB 0
+   \   00007D   00           DB 0
+   \   00007E   00           DB 0
+   \   00007F   00           DB 0
+   \   000080   00           DB 0
+   \   000081   00           DB 0
+   \   000082   00           DB 0
+   \   000083   00           DB 0
+   \   000084   00           DB 0
+   \   000085   00           DB 0
+   \   000086   00           DB 0
+   \   000087   00           DB 0
+   \   000088   00           DB 0
+   \   000089   00           DB 0
+   \   00008A   00           DB 0
+   \   00008B   00           DB 0
+   \   00008C   00           DB 0
+   \   00008D   00           DB 0
+   \   00008E   00           DB 0
+   \   00008F   00           DB 0
+   \   000090   00           DB 0
+   \   000091   00           DB 0
+   \   000092   00           DB 0
+   \   000093   00           DB 0
+   \   000094   00           DB 0
+   \   000095   00           DB 0
+   \   000096   00           DB 0
+   \   000097   00           DB 0
+   \   000098   00           DB 0
+   \   000099   00           DB 0
+   \   00009A   00           DB 0
+   \   00009B   00           DB 0
+   \   00009C   00           DB 0
+   \   00009D   00           DB 0
+   \   00009E   00           DB 0
+   \   00009F   00           DB 0
+   \   0000A0   00           DB 0
+   \   0000A1   00           DB 0
+   \   0000A2   00           DB 0
+   \   0000A3   00           DB 0
+   \   0000A4   00           DB 0
+   \   0000A5   00           DB 0
+   \   0000A6   00           DB 0
+   \   0000A7   00           DB 0
+   \   0000A8   00           DB 0
+   \   0000A9   00           DB 0
+   \   0000AA   00           DB 0
+   \   0000AB   00           DB 0
+   \   0000AC   00           DB 0
+   \   0000AD   00           DB 0
+   \   0000AE   00           DB 0
+   \   0000AF   00           DB 0
+   \   0000B0   00           DB 0
+   \   0000B1   00           DB 0
+   \   0000B2   00           DB 0
+   \   0000B3   00           DB 0
+   \   0000B4   00           DB 0
+   \   0000B5   00           DB 0
+   \   0000B6   00           DB 0
+   \   0000B7   00           DB 0
+   \   0000B8   00           DB 0
+   \   0000B9   00           DB 0
+   \   0000BA   00           DB 0
+   \   0000BB   00           DB 0
+   \   0000BC   00           DB 0
+   \   0000BD   00           DB 0
+   \   0000BE   00           DB 0
+   \   0000BF   00           DB 0
+   \   0000C0   00           DB 0
+   \   0000C1   00           DB 0
+   \   0000C2   00           DB 0
+   \   0000C3   00           DB 0
+   \   0000C4   00           DB 0
+   \   0000C5   00           DB 0
+   \   0000C6   00           DB 0
+   \   0000C7   00           DB 0
+   \   0000C8   00           DB 0
+   \   0000C9   00           DB 0
+   \   0000CA   00           DB 0
+   \   0000CB   00           DB 0
+   \   0000CC   00           DB 0
+   \   0000CD   00           DB 0
+   \   0000CE   00           DB 0
+   \   0000CF   00           DB 0
+   \   0000D0   00           DB 0
+   \   0000D1   00           DB 0
+   \   0000D2   00           DB 0
+   \   0000D3   00           DB 0
+   \   0000D4   00           DB 0
+   \   0000D5   00           DB 0
+   \   0000D6   00           DB 0
+   \   0000D7   00           DB 0
+   \   0000D8   00           DB 0
+   \   0000D9   00           DB 0
+   \   0000DA   00           DB 0
+   \   0000DB   00           DB 0
+   \   0000DC   00           DB 0
+   \   0000DD   00           DB 0
+   \   0000DE   00           DB 0
+   \   0000DF   00           DB 0
+   \   0000E0   00           DB 0
+   \   0000E1   00           DB 0
+   \   0000E2   00           DB 0
+   \   0000E3   00           DB 0
+   \   0000E4   00           DB 0
+   \   0000E5   00           DB 0
+   \   0000E6   03           DB 3
+   \   0000E7   76           DB 118
+   \   0000E8   01           DB 1
+   \   0000E9   48           DB 72
+   \   0000EA   DF           DB 223
+   \   0000EB   DF           DB 223
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for TP>`:
+   \   000000   ....         DW AC_zl_20
+   \   000002   ....         DW AC_zl_21
+   \   000004   ....         DW AC_zl_22
+   \   000006   ....         DW AC_zl_23
+   \   000008   ....         DW AC_zl_24
+   \   00000A   ....         DW AC_zl_25
+   \   00000C   ....         DW AC_zl_26
+   \   00000E   00000000     DB 0, 0, 0, 0, 0, 0, 0, 0
+   \            00000000
+   \   000016   0000         DB 0, 0
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??Air_conditioner_on::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Air_conditioner_on
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??Air_conditioner_off::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Air_conditioner_off
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??Air_conditioner_control::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    Air_conditioner_control
+
+   Maximum stack usage in bytes:
+
+   ISTACK XSTACK Function
+   ------ ------ --------
+      0      9   Air_conditioner_control
+        0      9   -> HalUARTWrite
+      2      0   Air_conditioner_off
+        2      0   -> HalUARTWrite
+      2      0   Air_conditioner_on
+        2      0   -> HalUARTWrite
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     236  ?<Initializer for AC_off>
+     236  ?<Initializer for AC_on>
+     236  ?<Initializer for AC_zl_20>
+     236  ?<Initializer for AC_zl_21>
+     236  ?<Initializer for AC_zl_22>
+     236  ?<Initializer for AC_zl_23>
+     236  ?<Initializer for AC_zl_24>
+     236  ?<Initializer for AC_zl_25>
+     236  ?<Initializer for AC_zl_26>
+      24  ?<Initializer for TP>
+       7  ?Subroutine0
+     236  AC_off
+     236  AC_on
+     236  AC_zl_20
+     236  AC_zl_21
+     236  AC_zl_22
+     236  AC_zl_23
+     236  AC_zl_24
+     236  AC_zl_25
+     236  AC_zl_26
+      71  Air_conditioner_control
+       6  Air_conditioner_control::?relay
+      50  Air_conditioner_off
+       6  Air_conditioner_off::?relay
+      23  Air_conditioner_on
+       6  Air_conditioner_on::?relay
+      24  TP
+       2  c2
+       2  off
+
+ 
+   151 bytes in segment BANKED_CODE
+    18 bytes in segment BANK_RELAYS
+ 2 148 bytes in segment XDATA_I
+ 2 148 bytes in segment XDATA_ID
+     4 bytes in segment XDATA_Z
+ 
+ 2 166 bytes of CODE     memory
+   151 bytes of HUGECODE memory
+ 2 152 bytes of XDATA    memory
+
+Errors: none
+Warnings: none

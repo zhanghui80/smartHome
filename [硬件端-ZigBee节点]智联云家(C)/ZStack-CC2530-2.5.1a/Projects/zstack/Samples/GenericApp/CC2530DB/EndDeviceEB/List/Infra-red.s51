@@ -1,0 +1,3065 @@
+///////////////////////////////////////////////////////////////////////////////
+//
+// IAR C/C++ Compiler V10.20.1.5333 for 8051              21/Dec/2019  19:46:02
+// Copyright 2004-2018 IAR Systems AB.
+// PC-locked license - IAR Embedded Workbench for 8051
+//
+//    Core               =  plain
+//    Code model         =  banked
+//    Data model         =  large
+//    Calling convention =  xdata reentrant
+//    Constant location  =  data_rom
+//    Dptr setup         =  1,16
+//                          
+//    Source file        =  
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+//    Command line       =  
+//        -f C:\Users\17245\AppData\Local\Temp\EWF13F.tmp
+//        (D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+//        -D NWK_AUTO_POLL -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC
+//        -D LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+//        -lA
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+//        --diag_suppress Pe001,Pa010 -o
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj
+//        -e --debug --core=plain --dptr=16,1 --data_model=large
+//        --code_model=banked --calling_convention=xdata_reentrant
+//        --place_constants=data_rom --nr_virtual_regs 8 -f
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg
+//        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_TX_DATA_MAX=3
+//        -DMAC_CFG_TX_MAX=6 -DMAC_CFG_RX_MAX=3) -f
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+//        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+//        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+//        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+//        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+//        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+//        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+//        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+//        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+//        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+//        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+//        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+//        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+//        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+//        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+//        -DREJOIN_POLL_RATE=440) -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\
+//        -I
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+//        -Ohz --require_prototypes --no_code_motion)
+//    Locale             =  Chinese (Simplified)_CHN.936
+//    List file          =  
+//        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List\Infra-red.s51
+//
+///////////////////////////////////////////////////////////////////////////////
+
+        NAME `Infra-red`
+
+        RTMODEL "__SystemLibrary", "CLib"
+        RTMODEL "__calling_convention", "xdata_reentrant"
+        RTMODEL "__code_model", "banked"
+        RTMODEL "__core", "plain"
+        RTMODEL "__data_model", "large"
+        RTMODEL "__dptr_size", "16"
+        RTMODEL "__extended_stack", "disabled"
+        RTMODEL "__location_for_constants", "data"
+        RTMODEL "__number_of_dptrs", "1"
+        RTMODEL "__register_banks", "*"
+        RTMODEL "__rt_version", "1"
+
+        RSEG DOVERLAY:DATA:NOROOT(0)
+        RSEG IOVERLAY:IDATA:NOROOT(0)
+        RSEG ISTACK:IDATA:NOROOT(0)
+        RSEG PSTACK:XDATA:NOROOT(0)
+        RSEG XSTACK:XDATA:NOROOT(0)
+
+        EXTERN ?BANKED_ENTER_XDATA
+        EXTERN ?BANKED_LEAVE_XDATA
+        EXTERN ?BDISPATCH
+        EXTERN ?BRET
+        EXTERN __INIT_XDATA_I
+        EXTERN __INIT_XDATA_Z
+
+        PUBLIC `??Air_conditioner_control::?relay`
+        FUNCTION `??Air_conditioner_control::?relay`,0203H
+        PUBLIC `??Air_conditioner_off::?relay`
+        FUNCTION `??Air_conditioner_off::?relay`,0203H
+        PUBLIC `??Air_conditioner_on::?relay`
+        FUNCTION `??Air_conditioner_on::?relay`,0203H
+        PUBLIC AC_off
+        PUBLIC AC_on
+        PUBLIC AC_zl_20
+        PUBLIC AC_zl_21
+        PUBLIC AC_zl_22
+        PUBLIC AC_zl_23
+        PUBLIC AC_zl_24
+        PUBLIC AC_zl_25
+        PUBLIC AC_zl_26
+        PUBLIC Air_conditioner_control
+        FUNCTION Air_conditioner_control,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        PUBLIC Air_conditioner_off
+        FUNCTION Air_conditioner_off,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC Air_conditioner_on
+        FUNCTION Air_conditioner_on,021203H
+        ARGFRAME XSTACK, 0, STACK
+        LOCFRAME ISTACK, 2, STACK
+        PUBLIC TP
+        PUBLIC off
+        
+          CFI Names cfiNames0
+          CFI StackFrame CFA_SP SP IDATA
+          CFI StackFrame CFA_PSP16 PSP16 XDATA
+          CFI StackFrame CFA_XSP16 XSP16 XDATA
+          CFI StaticOverlayFrame CFA_IOVERLAY IOVERLAY
+          CFI StaticOverlayFrame CFA_DOVERLAY DOVERLAY
+          CFI Resource `PSW.CY`:1, `B.BR0`:1, `B.BR1`:1, `B.BR2`:1, `B.BR3`:1
+          CFI Resource `B.BR4`:1, `B.BR5`:1, `B.BR6`:1, `B.BR7`:1, `VB.BR8`:1
+          CFI Resource `VB.BR9`:1, `VB.BR10`:1, `VB.BR11`:1, `VB.BR12`:1
+          CFI Resource `VB.BR13`:1, `VB.BR14`:1, `VB.BR15`:1, VB:8, B:8, A:8
+          CFI Resource PSW:8, DPL0:8, DPH0:8, R0:8, R1:8, R2:8, R3:8, R4:8, R5:8
+          CFI Resource R6:8, R7:8, V0:8, V1:8, V2:8, V3:8, V4:8, V5:8, V6:8, V7:8
+          CFI Resource SP:8, PSPH:8, PSPL:8, PSP16:16, XSPH:8, XSPL:8, XSP16:16
+          CFI VirtualResource ?RET:24
+          CFI Resource ?BRET_EXT:8
+          CFI VirtualResource ?RET_HIGH:8, ?RET_LOW:8
+          CFI ResourceParts PSP16 PSPH, PSPL
+          CFI ResourceParts XSP16 XSPH, XSPL
+          CFI ResourceParts ?RET ?BRET_EXT, ?RET_HIGH, ?RET_LOW
+          CFI EndNames cfiNames0
+        
+          CFI Common cfiCommon0 Using cfiNames0
+          CFI CodeAlign 1
+          CFI DataAlign -1
+          CFI ReturnAddress ?RET CODE
+          CFI CFA_DOVERLAY Used
+          CFI CFA_IOVERLAY Used
+          CFI CFA_SP SP+-3
+          CFI CFA_PSP16 PSP16+0
+          CFI CFA_XSP16 XSP16+0
+          CFI `PSW.CY` SameValue
+          CFI `B.BR0` SameValue
+          CFI `B.BR1` SameValue
+          CFI `B.BR2` SameValue
+          CFI `B.BR3` SameValue
+          CFI `B.BR4` SameValue
+          CFI `B.BR5` SameValue
+          CFI `B.BR6` SameValue
+          CFI `B.BR7` SameValue
+          CFI `VB.BR8` SameValue
+          CFI `VB.BR9` SameValue
+          CFI `VB.BR10` SameValue
+          CFI `VB.BR11` SameValue
+          CFI `VB.BR12` SameValue
+          CFI `VB.BR13` SameValue
+          CFI `VB.BR14` SameValue
+          CFI `VB.BR15` SameValue
+          CFI VB SameValue
+          CFI B Undefined
+          CFI A Undefined
+          CFI PSW SameValue
+          CFI DPL0 SameValue
+          CFI DPH0 SameValue
+          CFI R0 Undefined
+          CFI R1 Undefined
+          CFI R2 Undefined
+          CFI R3 Undefined
+          CFI R4 Undefined
+          CFI R5 Undefined
+          CFI R6 SameValue
+          CFI R7 SameValue
+          CFI V0 SameValue
+          CFI V1 SameValue
+          CFI V2 SameValue
+          CFI V3 SameValue
+          CFI V4 SameValue
+          CFI V5 SameValue
+          CFI V6 SameValue
+          CFI V7 SameValue
+          CFI PSPH Undefined
+          CFI PSPL Undefined
+          CFI XSPH Undefined
+          CFI XSPL Undefined
+          CFI ?RET Concat
+          CFI ?BRET_EXT Frame(CFA_SP, 3)
+          CFI ?RET_HIGH Frame(CFA_SP, 2)
+          CFI ?RET_LOW Frame(CFA_SP, 1)
+          CFI EndCommon cfiCommon0
+        
+HalUARTWrite        SYMBOL "HalUARTWrite"
+`??HalUARTWrite::?relay` SYMBOL "?relay", HalUARTWrite
+Air_conditioner_control SYMBOL "Air_conditioner_control"
+`??Air_conditioner_control::?relay` SYMBOL "?relay", Air_conditioner_control
+Air_conditioner_off SYMBOL "Air_conditioner_off"
+`??Air_conditioner_off::?relay` SYMBOL "?relay", Air_conditioner_off
+Air_conditioner_on  SYMBOL "Air_conditioner_on"
+`??Air_conditioner_on::?relay` SYMBOL "?relay", Air_conditioner_on
+
+        EXTERN `??HalUARTWrite::?relay`
+        FUNCTION `??HalUARTWrite::?relay`,00H
+        EXTERN HalUARTWrite
+        FUNCTION HalUARTWrite,0202H
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+
+// D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Infra-red.c
+//    1 #include "Infrared.h"
+//    2 #include "iocc2530.h"
+//    3 #include <string.h>
+//    4 #include "OSAL.h"
+//    5 #include "AF.h"
+//    6 #include "ZDApp.h"
+//    7 #include "ZDObject.h"
+//    8 #include "ZDProfile.h"
+//    9 #include <string.h>
+//   10 #include "Coordinator.h"
+//   11 #include "DebugTrace.h"
+//   12 #include "Sensor.h"
+//   13 #include "Infrared.h"
+//   14 #if !defined( WIN32 )
+//   15   #include "OnBoard.h"
+//   16 #endif
+//   17 
+//   18 /* HAL */
+//   19 #include "hal_lcd.h"
+//   20 #include "hal_led.h"
+//   21 #include "hal_key.h"
+//   22 #include "hal_uart.h"
+//   23 
+//   24 /*
+//   25 
+//   26 int AC_off[236] = { FD FD 30 03 40 17 00 34 1D 01 33 02 68 00 24 00 22 00 24 00 EE 04 25 00 DA 09 24 00 00 00 21 00 FF FF FF FF FF FF FF FF 01 22 21 11 21 22 12 22 22 22 21 12 22 22 21 21 22 12 31 22 21 22 22 22 22 22 22 22 22 22 22 22 21 21 24 01 22 21 11 21 22 12 22 22 22 21 12 22 22 21 11 22 12 32 22 22 22 22 22 22 22 22 22 21 21 22 22 21 22 15 00 00 F0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+//   27 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 76 3F D3 DF DF
+//   28 
+//   29 };*/
+//   30 
+//   31 
+//   32 
+//   33 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//   34 uint8 AC_on[236] = { 
+AC_on:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_on>`
+        REQUIRE __INIT_XDATA_I
+//   35 0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1D ,0X01 ,0X33 ,
+//   36 0X02 ,0X69 ,0X00 ,0X25 ,0X00 ,0X21 ,0X00 ,0X26 ,0X00 ,0XEF ,0X04 ,0X25 ,0X00 ,0XDE ,
+//   37 0X09 ,0X25 ,0X00 ,0X00 ,0X00 ,0X21 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+//   38 0XFF ,0X01 ,0X22 ,0X11 ,0X11 ,0X22 ,0X12 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,
+//   39 0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+//   40 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X11 ,0X24 ,0X01 ,0X22 ,0X11 ,0X11 ,0X22 ,0X12 ,
+//   41 0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,0X22 ,
+//   42 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X22 ,0X22 ,0X12 ,
+//   43 0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   44 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   45 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   46 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   47 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   48 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   49 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   50 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   51 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X08 ,0X76 ,0X00 ,0XD1 ,0XDF ,
+//   52 0XDF
+//   53 };
+//   54 
+//   55 /****关闭***/
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//   56 uint8 AC_off[236] = {
+AC_off:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_off>`
+        REQUIRE __INIT_XDATA_I
+//   57 0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1D ,0X01 ,0X33 ,
+//   58 0X02 ,0X68 ,0X00 ,0X24 ,0X00 ,0X22 ,0X00 ,0X24 ,0X00 ,0XEE ,0X04 ,0X25 ,0X00 ,0XDA ,
+//   59 0X09 ,0X24 ,0X00 ,0X00 ,0X00 ,0X21 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+//   60 0XFF ,0X01 ,0X22 ,0X21 ,0X11 ,0X21 ,0X22 ,0X12 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,
+//   61 0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+//   62 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X24 ,0X01 ,0X22 ,0X21 ,0X11 ,0X21 ,0X22 ,
+//   63 0X12 ,0X22 ,0X22 ,0X22 ,0X21 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,0X22 ,
+//   64 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X22 ,0X21 ,0X22 ,
+//   65 0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   66 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   67 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   68 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   69 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   70 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   71 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   72 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//   73 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X06 ,0X76 ,0X3F ,0XD3 ,0XDF ,
+//   74 0XDF
+//   75 };
+//   76 
+//   77 /*
+//   78 uint8 AC_zl_16[236] = {
+//   79 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1A,0X01,0X35,0X02,0X68,0X00,0X26,0X00,
+//   80 0X24,0X00,0X24,0X00,0XED,0X04,0X25,0X00,0XDC,0X09,0X25,0X00,0X1C,0X01,0X36,0X02,
+//   81 0X00,0X00,0X20,0X00,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X22,0X22,0X22,0X22,
+//   82 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//   83 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X24,0X51,0X22,0X12,0X21,0X22,
+//   84 0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//   85 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X12,0X26,0X00,0X00,
+//   86 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   87 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   88 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   89 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   90 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   91 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   92 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//   93 0X00,0X00,0X00,0X00,0X00,0X00,0X05,0X76,0X01,0X27,0XDF,0XDF
+//   94 };
+//   95 
+//   96 
+//   97 uint8 AC_zl_17[236] = {
+//   98 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+//   99 0X24,0X00,0X24,0X00,0XEC,0X04,0X24,0X00,0XDB,0X09,0X25,0X00,0X00,0X00,0X20,0X00,
+//  100 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X21,0X22,0X22,0X22,
+//  101 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  102 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X24,0X01,0X22,0X12,0X21,0X21,
+//  103 0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  104 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X25,0X00,0X00,
+//  105 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  106 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  107 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  108 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  109 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  110 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  111 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  112 0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X3F,0X9B,0XDF,0XDF
+//  113 };
+//  114 
+//  115 
+//  116 uint8 AC_zl_18[236] = {
+//  117 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+//  118 0X22,0X00,0X25,0X00,0XEC,0X04,0X25,0X00,0XD8,0X09,0X25,0X00,0X00,0X00,0X21,0X00,
+//  119 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X12,0X21,0X22,0X12,0X22,0X22,
+//  120 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  121 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X11,0X24,0X01,0X22,0X12,0X21,0X22,
+//  122 0X12,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  123 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X25,0X00,0X00,
+//  124 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  125 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  126 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  127 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  128 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  129 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  130 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  131 0X00,0X00,0X00,0X00,0X00,0X00,0X04,0X76,0X01,0XA2,0XDF,0XDF
+//  132 };
+//  133 
+//  134 
+//  135 uint8 AC_zl_19[236] = {
+//  136 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X31,0X02,0X69,0X00,0X26,0X00,
+//  137 0X23,0X00,0X24,0X00,0XEE,0X04,0X24,0X00,0XDA,0X09,0X26,0X00,0X00,0X00,0X22,0X00,
+//  138 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X12,0X22,0X22,
+//  139 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  140 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X11,0X24,0X01,0X22,0X11,0X21,0X21,
+//  141 0X12,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  142 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X11,0X25,0X00,0X00,
+//  143 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  144 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  145 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  146 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  147 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  148 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  149 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  150 0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X3E,0X60,0XDF,0XDF
+//  151 };
+//  152 
+//  153 */
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  154 uint8 AC_zl_20[236] = {
+AC_zl_20:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_20>`
+        REQUIRE __INIT_XDATA_I
+//  155 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X32,0X02,0X68,0X00,0X26,0X00,
+//  156 0X21,0X00,0X24,0X00,0XEC,0X04,0X24,0X00,0XD9,0X09,0X24,0X00,0X00,0X00,0X20,0X00,
+//  157 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X21,0X22,0X22,
+//  158 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  159 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X14,0X01,0X22,0X11,0X21,0X22,
+//  160 0X21,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  161 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X22,0X15,0X00,0X00,
+//  162 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  163 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  164 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  165 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  166 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  167 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  168 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  169 0X00,0X00,0X00,0X00,0X00,0X00,0X04,0X76,0X3F,0XAE,0XDF,0XDF
+//  170 };
+//  171 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  172 uint8 AC_zl_21[236] = {
+AC_zl_21:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_21>`
+        REQUIRE __INIT_XDATA_I
+//  173 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1A,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+//  174 0X23,0X00,0X24,0X00,0XEF,0X04,0X24,0X00,0XDA,0X09,0X26,0X00,0X00,0X00,0X22,0X00,
+//  175 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X21,0X22,0X22,
+//  176 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  177 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X14,0X01,0X22,0X11,0X21,0X21,
+//  178 0X21,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  179 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X22,0X15,0X00,0X00,
+//  180 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  181 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  182 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  183 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  184 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  185 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  186 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  187 0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X76,0X00,0X71,0XDF,0XDF
+//  188 };
+//  189 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  190 uint8 AC_zl_22[236] = {
+AC_zl_22:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_22>`
+        REQUIRE __INIT_XDATA_I
+//  191 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X33,0X02,0X68,0X00,0X26,0X00,
+//  192 0X23,0X00,0X24,0X00,0XEE,0X04,0X24,0X00,0XDB,0X09,0X24,0X00,0X00,0X00,0X21,0X00,
+//  193 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X11,0X22,0X22,
+//  194 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  195 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X12,0X14,0X01,0X22,0X11,0X21,0X22,
+//  196 0X11,0X22,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  197 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X12,0X15,0X00,0X00,
+//  198 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  199 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  200 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  201 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  202 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  203 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  204 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  205 0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X75,0X00,0X4B,0XDF,0XDF
+//  206 };
+//  207 
+//  208 /***制冷模式23度***/
+//  209 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  210 uint8 AC_zl_23[236]  = {
+AC_zl_23:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_23>`
+        REQUIRE __INIT_XDATA_I
+//  211 0XFD ,0XFD ,0X30 ,0X03 ,0X40 ,0X17 ,0X00 ,0X34 ,0X1A ,0X01 ,
+//  212 0X33 ,0X02 ,0X68 ,0X00 ,0X26 ,0X00 ,0X23 ,0X00 ,0X24 ,0X00 ,0XEF ,0X04 ,0X24 ,0X00 ,
+//  213 0XDA ,0X09 ,0X26 ,0X00 ,0X00 ,0X00 ,0X22 ,0X00 ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,0XFF ,
+//  214 0XFF ,0XFF ,0X01 ,0X22 ,0X11 ,0X21 ,0X21 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X12 ,
+//  215 0X22 ,0X22 ,0X21 ,0X21 ,0X22 ,0X12 ,0X31 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,
+//  216 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X22 ,0X14 ,0X01 ,0X22 ,0X11 ,0X21 ,0X21 ,
+//  217 0X21 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X12 ,0X22 ,0X22 ,0X21 ,0X11 ,0X22 ,0X12 ,0X32 ,
+//  218 0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X22 ,0X21 ,0X22 ,0X22 ,0X22 ,0X21 ,
+//  219 0X22 ,0X15 ,0X00 ,0X00 ,0XF0 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  220 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  221 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  222 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  223 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  224 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  225 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  226 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,
+//  227 0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X00 ,0X08 ,0X76 ,0X00 ,0X71 ,
+//  228 0XDF ,0XDF
+//  229 };
+//  230 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  231 uint8 AC_zl_24[236] = {
+AC_zl_24:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_24>`
+        REQUIRE __INIT_XDATA_I
+//  232 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1B,0X01,0X31,0X02,0X69,0X00,0X26,0X00,
+//  233 0X22,0X00,0X24,0X00,0XED,0X04,0X24,0X00,0XDA,0X09,0X25,0X00,0X00,0X00,0X21,0X00,
+//  234 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X22,0X22,0X12,0X22,
+//  235 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  236 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X14,0X01,0X22,0X11,0X21,0X22,
+//  237 0X22,0X12,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  238 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X22,0X21,0X15,0X00,0X00,
+//  239 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  240 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  241 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  242 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  243 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  244 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  245 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  246 0X00,0X00,0X00,0X00,0X00,0X00,0X06,0X76,0X00,0X0E,0XDF,0XDF
+//  247 };
+//  248 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  249 uint8 AC_zl_25[236] = {
+AC_zl_25:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_25>`
+        REQUIRE __INIT_XDATA_I
+//  250 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1C,0X01,0X32,0X02,0X69,0X00,0X26,0X00,
+//  251 0X22,0X00,0X25,0X00,0XEE,0X04,0X24,0X00,0XDA,0X09,0X24,0X00,0X00,0X00,0X20,0X00,
+//  252 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X22,0X11,0X21,0X21,0X22,0X12,0X22,
+//  253 0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X21,0X22,0X12,0X31,0X22,0X21,0X22,0X22,0X22,
+//  254 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X21,0X14,0X01,0X22,0X11,0X21,0X21,
+//  255 0X22,0X12,0X22,0X22,0X22,0X22,0X12,0X22,0X22,0X21,0X11,0X22,0X12,0X32,0X22,0X22,
+//  256 0X22,0X22,0X22,0X22,0X22,0X22,0X22,0X21,0X22,0X22,0X22,0X21,0X21,0X15,0X00,0X00,
+//  257 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  258 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  259 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  260 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  261 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  262 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  263 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  264 0X00,0X00,0X00,0X00,0X00,0X00,0X08,0X75,0X3E,0X41,0XDF,0XDF 
+//  265 };
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  266 uint8 AC_zl_26[236] = {
+AC_zl_26:
+        DATA8
+        DS 236
+        REQUIRE `?<Initializer for AC_zl_26>`
+        REQUIRE __INIT_XDATA_I
+//  267 0XFD,0XFD,0X30,0X03,0X40,0X17,0X00,0X34,0X1C,0X01,0X33,0X02,0X23,0X00,0X26,0X00, 
+//  268 0X6A,0X00,0X25,0X00,0XEE,0X04,0X24,0X00,0XDD,0X09,0X24,0X00,0X00,0X00,0X21,0X00, 
+//  269 0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0XFF,0X01,0X12,0X21,0X11,0X11,0X21,0X21,0X11, 
+//  270 0X11,0X11,0X11,0X21,0X11,0X11,0X12,0X12,0X11,0X21,0X31,0X11,0X11,0X11,0X11,0X11, 
+//  271 0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X21,0X11,0X14,0X01,0X12,0X21,0X11,0X11, 
+//  272 0X21,0X21,0X11,0X11,0X11,0X11,0X21,0X11,0X11,0X12,0X22,0X11,0X21,0X31,0X11,0X11,
+//  273 0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X11,0X15,0X00,0X00, 
+//  274 0XF0,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  275 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,
+//  276 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  277 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  278 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  279 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  280 0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00, 
+//  281 0X00,0X00,0X00,0X00,0X00,0X00,0X03,0X76,0X01,0X48,0XDF,0XDF                
+//  282 };
+//  283 
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+//  284 static int c2 = 0;
+c2:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+
+        RSEG XDATA_Z:XDATA:NOROOT(0)
+        DATA16
+//  285 int off = 0;
+off:
+        DS 2
+        REQUIRE __INIT_XDATA_Z
+//  286 
+
+        RSEG XDATA_I:XDATA:NOROOT(0)
+//  287 uint8* TP[12] = {
+TP:
+        DATA8
+        DS 24
+        REQUIRE `?<Initializer for TP>`
+        REQUIRE __INIT_XDATA_I
+//  288 /*AC_zl_17,AC_zl_18,AC_zl_19,**/AC_zl_20,AC_zl_21,
+//  289 AC_zl_22,AC_zl_23,AC_zl_24,AC_zl_25,AC_zl_26
+//  290 };
+//  291 
+//  292 
+//  293 
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+//  294 void Air_conditioner_on(int a)  //开启
+Air_conditioner_on:
+          CFI Block cfiBlock0 Using cfiCommon0
+          CFI Function Air_conditioner_on
+        CODE
+//  295 {
+        FUNCALL Air_conditioner_on, HalUARTWrite
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH      DPL
+          CFI DPL0 Frame(CFA_SP, 4)
+          CFI CFA_SP SP+-4
+        PUSH      DPH
+          CFI DPH0 Frame(CFA_SP, 5)
+          CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  296 
+//  297   if(a == 1)
+        MOV       A,#0x1
+        XRL       A,R2
+        ORL       A,R3
+        JNZ       ??Air_conditioner_on_0
+//  298   {
+//  299     HalUARTWrite(0,(uint8*)AC_on,236);
+        ; Setup parameters for call to function HalUARTWrite
+        MOV       R4,#-0x14
+        MOV       R5,#0x0
+        MOV       R2,#AC_on & 0xff
+        MOV       R3,#(AC_on >> 8) & 0xff
+        MOV       R1,#0x0
+        LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+//  300   }
+//  301 
+//  302 }
+??Air_conditioner_on_0:
+          CFI EndBlock cfiBlock0
+        REQUIRE ?Subroutine0
+        ; // Fall through to label ?Subroutine0
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+?Subroutine0:
+          CFI Block cfiBlock1 Using cfiCommon0
+          CFI NoFunction
+          CFI CFA_SP SP+-5
+          CFI DPL0 Frame(CFA_SP, 4)
+          CFI DPH0 Frame(CFA_SP, 5)
+        POP       DPH
+          CFI CFA_SP SP+-4
+          CFI DPH0 SameValue
+        POP       DPL
+          CFI CFA_SP SP+-3
+          CFI DPL0 SameValue
+        LJMP      ?BRET
+          CFI EndBlock cfiBlock1
+//  303 
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+//  304 void Air_conditioner_off(int a)  //关闭
+Air_conditioner_off:
+          CFI Block cfiBlock2 Using cfiCommon0
+          CFI Function Air_conditioner_off
+        CODE
+//  305 { 
+        FUNCALL Air_conditioner_off, HalUARTWrite
+        LOCFRAME ISTACK, 2, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 0, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 2, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 0, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        PUSH      DPL
+          CFI DPL0 Frame(CFA_SP, 4)
+          CFI CFA_SP SP+-4
+        PUSH      DPH
+          CFI DPH0 Frame(CFA_SP, 5)
+          CFI CFA_SP SP+-5
+        ; Saved register size: 2
+        ; Auto size: 0
+//  306   
+//  307   if(a == 0 && off  == 0)
+        MOV       A,R2
+        ORL       A,R3
+        JNZ       ??Air_conditioner_off_0
+        MOV       DPTR,#off
+        MOVX      A,@DPTR
+        MOV       R0,A
+        INC       DPTR
+        MOVX      A,@DPTR
+        MOV       R1,A
+        MOV       A,R0
+        ORL       A,R1
+        JNZ       ??Air_conditioner_off_0
+//  308   {
+//  309     HalUARTWrite(0,(uint8*)AC_off,236);
+        ; Setup parameters for call to function HalUARTWrite
+        MOV       R4,#-0x14
+        MOV       R5,#0x0
+        MOV       R2,#AC_off & 0xff
+        MOV       R3,#(AC_off >> 8) & 0xff
+        MOV       R1,#0x0
+        LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+//  310     off = 1;
+        MOV       DPTR,#off
+        MOV       A,#0x1
+        MOVX      @DPTR,A
+        INC       DPTR
+        CLR       A
+        MOVX      @DPTR,A
+//  311     c2 = 0;
+        MOV       DPTR,#c2
+        MOVX      @DPTR,A
+        INC       DPTR
+        MOVX      @DPTR,A
+//  312   }
+//  313   
+//  314 }
+??Air_conditioner_off_0:
+        SJMP      ?Subroutine0
+          CFI EndBlock cfiBlock2
+//  315 
+
+        RSEG BANKED_CODE:HUGECODE:NOROOT(0)
+//  316 void Air_conditioner_control(int TP1)  //温度控制
+Air_conditioner_control:
+          CFI Block cfiBlock3 Using cfiCommon0
+          CFI Function Air_conditioner_control
+        CODE
+//  317 {
+        FUNCALL Air_conditioner_control, HalUARTWrite
+        LOCFRAME ISTACK, 0, STACK
+        LOCFRAME PSTACK, 0, STACK
+        LOCFRAME XSTACK, 9, STACK
+        LOCFRAME IOVERLAY, 0, STATIC
+        LOCFRAME DOVERLAY, 0, STATIC
+        ARGFRAME ISTACK, 0, STACK
+        ARGFRAME PSTACK, 0, STACK
+        ARGFRAME XSTACK, 9, STACK
+        ARGFRAME IOVERLAY, 0, STATIC
+        ARGFRAME DOVERLAY, 0, STATIC
+        MOV       A,#-0x9
+        LCALL     ?BANKED_ENTER_XDATA
+          CFI DPH0 load(1, XDATA, add(CFA_XSP16, literal(-1)))
+          CFI DPL0 load(1, XDATA, add(CFA_XSP16, literal(-2)))
+          CFI ?BRET_EXT load(1, XDATA, add(CFA_XSP16, literal(-3)))
+          CFI ?RET_HIGH load(1, XDATA, add(CFA_XSP16, literal(-4)))
+          CFI ?RET_LOW load(1, XDATA, add(CFA_XSP16, literal(-5)))
+          CFI R7 load(1, XDATA, add(CFA_XSP16, literal(-6)))
+          CFI V0 load(1, XDATA, add(CFA_XSP16, literal(-7)))
+          CFI VB load(1, XDATA, add(CFA_XSP16, literal(-8)))
+          CFI R6 load(1, XDATA, add(CFA_XSP16, literal(-9)))
+          CFI CFA_SP SP+0
+          CFI CFA_XSP16 add(XSP16, 9)
+        ; Saved register size: 9
+        ; Auto size: 0
+        MOV       A,R2
+        MOV       R6,A
+        MOV       A,R3
+        MOV       R7,A
+//  318   int c1 = TP1;
+//  319   
+//  320   if(c1 != c2)
+        MOV       DPTR,#c2
+        MOVX      A,@DPTR
+        XRL       A,R6
+        JNZ       ??Air_conditioner_control_0
+        INC       DPTR
+        MOVX      A,@DPTR
+        XRL       A,R7
+??Air_conditioner_control_0:
+        JZ        ??Air_conditioner_control_1
+//  321   {
+//  322     
+//  323     HalUARTWrite(0,(uint8*)TP[TP1-20],236);
+        ; Setup parameters for call to function HalUARTWrite
+        MOV       R4,#-0x14
+        MOV       R5,#0x0
+        MOV       A,R2
+        ADD       A,R2
+        MOV       R0,A
+        MOV       A,R3
+        RLC       A
+        MOV       R1,A
+        MOV       A,#(TP + 216) & 0xff
+        ADD       A,R0
+        MOV       DPL,A
+        MOV       A,#((TP - 40) >> 8) & 0xff
+        ADDC      A,R1
+        MOV       DPH,A
+        MOVX      A,@DPTR
+        MOV       R2,A
+        INC       DPTR
+        MOVX      A,@DPTR
+        MOV       R3,A
+        MOV       R1,#0x0
+        LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
+//  324     c2 = c1;
+        MOV       DPTR,#c2
+        MOV       A,R6
+        MOVX      @DPTR,A
+        INC       DPTR
+        MOV       A,R7
+        MOVX      @DPTR,A
+//  325     off = 0;
+        MOV       DPTR,#off
+        CLR       A
+        MOVX      @DPTR,A
+        INC       DPTR
+        MOVX      @DPTR,A
+//  326   }
+//  327   
+//  328 }
+??Air_conditioner_control_1:
+        MOV       R7,#0x1
+        LJMP      ?BANKED_LEAVE_XDATA
+          CFI EndBlock cfiBlock3
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_on>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 29
+        DB 1
+        DB 51
+        DB 2
+        DB 105
+        DB 0
+        DB 37
+        DB 0
+        DB 33
+        DB 0
+        DB 38
+        DB 0
+        DB 239
+        DB 4
+        DB 37
+        DB 0
+        DB 222
+        DB 9
+        DB 37
+        DB 0
+        DB 0
+        DB 0
+        DB 33
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 17
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 17
+        DB 36
+        DB 1
+        DB 34
+        DB 17
+        DB 17
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 8
+        DB 118
+        DB 0
+        DB 209
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_off>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 29
+        DB 1
+        DB 51
+        DB 2
+        DB 104
+        DB 0
+        DB 36
+        DB 0
+        DB 34
+        DB 0
+        DB 36
+        DB 0
+        DB 238
+        DB 4
+        DB 37
+        DB 0
+        DB 218
+        DB 9
+        DB 36
+        DB 0
+        DB 0
+        DB 0
+        DB 33
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 33
+        DB 17
+        DB 33
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 36
+        DB 1
+        DB 34
+        DB 33
+        DB 17
+        DB 33
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 6
+        DB 118
+        DB 63
+        DB 211
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_20>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 27
+        DB 1
+        DB 50
+        DB 2
+        DB 104
+        DB 0
+        DB 38
+        DB 0
+        DB 33
+        DB 0
+        DB 36
+        DB 0
+        DB 236
+        DB 4
+        DB 36
+        DB 0
+        DB 217
+        DB 9
+        DB 36
+        DB 0
+        DB 0
+        DB 0
+        DB 32
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 4
+        DB 118
+        DB 63
+        DB 174
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_21>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 26
+        DB 1
+        DB 51
+        DB 2
+        DB 104
+        DB 0
+        DB 38
+        DB 0
+        DB 35
+        DB 0
+        DB 36
+        DB 0
+        DB 239
+        DB 4
+        DB 36
+        DB 0
+        DB 218
+        DB 9
+        DB 38
+        DB 0
+        DB 0
+        DB 0
+        DB 34
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 8
+        DB 118
+        DB 0
+        DB 113
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_22>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 27
+        DB 1
+        DB 51
+        DB 2
+        DB 104
+        DB 0
+        DB 38
+        DB 0
+        DB 35
+        DB 0
+        DB 36
+        DB 0
+        DB 238
+        DB 4
+        DB 36
+        DB 0
+        DB 219
+        DB 9
+        DB 36
+        DB 0
+        DB 0
+        DB 0
+        DB 33
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 17
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 17
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 8
+        DB 117
+        DB 0
+        DB 75
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_23>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 26
+        DB 1
+        DB 51
+        DB 2
+        DB 104
+        DB 0
+        DB 38
+        DB 0
+        DB 35
+        DB 0
+        DB 36
+        DB 0
+        DB 239
+        DB 4
+        DB 36
+        DB 0
+        DB 218
+        DB 9
+        DB 38
+        DB 0
+        DB 0
+        DB 0
+        DB 34
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 8
+        DB 118
+        DB 0
+        DB 113
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_24>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 27
+        DB 1
+        DB 49
+        DB 2
+        DB 105
+        DB 0
+        DB 38
+        DB 0
+        DB 34
+        DB 0
+        DB 36
+        DB 0
+        DB 237
+        DB 4
+        DB 36
+        DB 0
+        DB 218
+        DB 9
+        DB 37
+        DB 0
+        DB 0
+        DB 0
+        DB 33
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 6
+        DB 118
+        DB 0
+        DB 14
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_25>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 28
+        DB 1
+        DB 50
+        DB 2
+        DB 105
+        DB 0
+        DB 38
+        DB 0
+        DB 34
+        DB 0
+        DB 37
+        DB 0
+        DB 238
+        DB 4
+        DB 36
+        DB 0
+        DB 218
+        DB 9
+        DB 36
+        DB 0
+        DB 0
+        DB 0
+        DB 32
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 49
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 20
+        DB 1
+        DB 34
+        DB 17
+        DB 33
+        DB 33
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 18
+        DB 34
+        DB 34
+        DB 33
+        DB 17
+        DB 34
+        DB 18
+        DB 50
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 34
+        DB 34
+        DB 34
+        DB 33
+        DB 33
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 8
+        DB 117
+        DB 62
+        DB 65
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for AC_zl_26>`:
+        DATA8
+        DB 253
+        DB 253
+        DB 48
+        DB 3
+        DB 64
+        DB 23
+        DB 0
+        DB 52
+        DB 28
+        DB 1
+        DB 51
+        DB 2
+        DB 35
+        DB 0
+        DB 38
+        DB 0
+        DB 106
+        DB 0
+        DB 37
+        DB 0
+        DB 238
+        DB 4
+        DB 36
+        DB 0
+        DB 221
+        DB 9
+        DB 36
+        DB 0
+        DB 0
+        DB 0
+        DB 33
+        DB 0
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 255
+        DB 1
+        DB 18
+        DB 33
+        DB 17
+        DB 17
+        DB 33
+        DB 33
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 33
+        DB 17
+        DB 17
+        DB 18
+        DB 18
+        DB 17
+        DB 33
+        DB 49
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 33
+        DB 17
+        DB 20
+        DB 1
+        DB 18
+        DB 33
+        DB 17
+        DB 17
+        DB 33
+        DB 33
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 33
+        DB 17
+        DB 17
+        DB 18
+        DB 34
+        DB 17
+        DB 33
+        DB 49
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 17
+        DB 21
+        DB 0
+        DB 0
+        DB 240
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 0
+        DB 3
+        DB 118
+        DB 1
+        DB 72
+        DB 223
+        DB 223
+
+        RSEG XDATA_ID:CODE:NOROOT(0)
+`?<Initializer for TP>`:
+        DATA16
+        DW AC_zl_20
+        DW AC_zl_21
+        DW AC_zl_22
+        DW AC_zl_23
+        DW AC_zl_24
+        DW AC_zl_25
+        DW AC_zl_26
+        DB 0, 0, 0, 0, 0, 0, 0, 0
+        DB 0, 0
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+`??Air_conditioner_on::?relay`:
+        CODE
+        LCALL   ?BDISPATCH
+        DATA24
+        DC24    Air_conditioner_on
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+`??Air_conditioner_off::?relay`:
+        CODE
+        LCALL   ?BDISPATCH
+        DATA24
+        DC24    Air_conditioner_off
+
+        RSEG BANK_RELAYS:CODE:REORDER:NOROOT(0)
+`??Air_conditioner_control::?relay`:
+        CODE
+        LCALL   ?BDISPATCH
+        DATA24
+        DC24    Air_conditioner_control
+
+        END
+// 
+//   151 bytes in segment BANKED_CODE
+//    18 bytes in segment BANK_RELAYS
+// 2 148 bytes in segment XDATA_I
+// 2 148 bytes in segment XDATA_ID
+//     4 bytes in segment XDATA_Z
+// 
+// 2 166 bytes of CODE     memory
+//   151 bytes of HUGECODE memory
+// 2 152 bytes of XDATA    memory
+//
+//Errors: none
+//Warnings: none

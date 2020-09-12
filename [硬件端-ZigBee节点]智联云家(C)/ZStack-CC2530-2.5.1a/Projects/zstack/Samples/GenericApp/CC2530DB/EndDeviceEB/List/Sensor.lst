@@ -1,0 +1,277 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               25/Apr/2019  15:59:37
+# Copyright 2004-2018 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for 8051
+#
+#    Core               =  plain
+#    Code model         =  banked
+#    Data model         =  large
+#    Calling convention =  xdata reentrant
+#    Constant location  =  data_rom
+#    Dptr setup         =  1,16
+#                          
+#    Source file        =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Sensor.c
+#    Command line       =  
+#        -f C:\Users\17245\AppData\Local\Temp\EWC0E5.tmp
+#        (D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Sensor.c
+#        -D NWK_AUTO_POLL -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC
+#        -D LCD_SUPPORTED=DEBUG -D xPOWER_SAVING -lC
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+#        -lA
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List
+#        --diag_suppress Pe001,Pa010 -o
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj
+#        -e --debug --core=plain --dptr=16,1 --data_model=large
+#        --code_model=banked --calling_convention=xdata_reentrant
+#        --place_constants=data_rom --nr_virtual_regs 8 -f
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wEndev.cfg
+#        (-DCPU32MHZ -DROOT=__near_func -DMAC_CFG_TX_DATA_MAX=3
+#        -DMAC_CFG_TX_MAX=6 -DMAC_CFG_RX_MAX=3) -f
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\Tools\CC2530DB\f8wConfig.cfg
+#        (-DZIGBEEPRO -DSECURE=0 -DZG_SECURE_DYNAMIC=0 -DREFLECTOR
+#        -DDEFAULT_CHANLIST=0x00000800 -DZDAPP_CONFIG_PAN_ID=0xFFFF
+#        -DNWK_START_DELAY=100 -DEXTENDED_JOINING_RANDOM_MASK=0x007F
+#        -DBEACON_REQUEST_DELAY=100 -DBEACON_REQ_DELAY_MASK=0x00FF
+#        -DLINK_STATUS_JITTER_MASK=0x007F -DROUTE_EXPIRY_TIME=30
+#        -DAPSC_ACK_WAIT_DURATION_POLLED=3000 -DNWK_INDIRECT_MSG_TIMEOUT=7
+#        -DMAX_RREQ_ENTRIES=8 -DAPSC_MAX_FRAME_RETRIES=3
+#        -DNWK_MAX_DATA_RETRIES=2 -DMAX_POLL_FAILURE_RETRIES=2 -DMAX_BCAST=9
+#        -DAPS_MAX_GROUPS=16 -DMAX_RTG_ENTRIES=40 -DNWK_MAX_BINDING_ENTRIES=4
+#        -DMAX_BINDING_CLUSTER_IDS=4 "-DDEFAULT_KEY={0x01, 0x03, 0x05, 0x07,
+#        0x09, 0x0B, 0x0D, 0x0F, 0x00, 0x02, 0x04, 0x06, 0x08, 0x0A, 0x0C,
+#        0x0D}" -DMAC_MAX_FRAME_SIZE=116 -DZDNWKMGR_MIN_TRANSMISSIONS=20
+#        "-DCONST=const __code" -DGENERIC=__generic -DRFD_RCVC_ALWAYS_ON=FALSE
+#        -DPOLL_RATE=1000 -DQUEUED_POLL_RATE=100 -DRESPONSE_POLL_RATE=100
+#        -DREJOIN_POLL_RATE=440) -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\Source\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\ZMain\TI2530DB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\hal\target\CC2530EB\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\high_level\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mac\low_level\srf04\single_chip\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\mt\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\osal\include\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\saddr\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\services\sdata\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\af\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\nwk\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sapi\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sec\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\sys\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\stack\zdo\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\
+#        -I
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\..\..\..\..\..\Components\zmac\f8w\
+#        -Ohz --require_prototypes --no_code_motion)
+#    Locale             =  Chinese (Simplified)_CHN.936
+#    List file          =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\List\Sensor.lst
+#    Object file        =  
+#        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\EndDeviceEB\Obj\Sensor.r51
+#
+###############################################################################
+
+D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Sensor.c
+      1          #include "Sensor.h"
+      2          #include <iocc2530.h>
+
+   \                                 In  segment SFR_AN, at 0x88
+   \   union <unnamed> volatile __sfr _A_TCON
+   \                     _A_TCON:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xb6
+   \   unsigned char volatile __sfr ADCCON3
+   \                     ADCCON3:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xba
+   \   unsigned char volatile __sfr ADCL
+   \                     ADCL:
+   \   000000                DS 1
+
+   \                                 In  segment SFR_AN, at 0xbb
+   \   unsigned char volatile __sfr ADCH
+   \                     ADCH:
+   \   000000                DS 1
+      3          
+      4          #define HAL_ADC_REF_115V        0X00
+      5          #define HAL_ADC_DEC_256         0X20
+      6          #define HAL_ADC_CHN_TEMP        0X0e
+      7          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+      8          int8 readTemp(void)
+   \                     readTemp:
+      9          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000   74F6         MOV       A,#-0xa
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+     10            static uint16 reference_voltage;
+     11            static uint8 bCalibrate = TRUE;
+     12            uint16 value;
+     13            int8 temp;
+     14          
+     15            ATEST         = 0X01;
+   \   000005   9061BD       MOV       DPTR,#0x61bd
+   \   000008   7401         MOV       A,#0x1
+   \   00000A   F0           MOVX      @DPTR,A
+     16            TR0          |= 0X01;
+   \   00000B   90624B       MOV       DPTR,#0x624b
+   \   00000E   E0           MOVX      A,@DPTR
+   \   00000F   D2E0         SETB      0xE0 /* A   */.0
+   \   000011   F0           MOVX      @DPTR,A
+     17            ADCIF         = 0;
+   \   000012   C28D         CLR       0x88.5
+     18            ADCCON3       = (HAL_ADC_REF_115V | HAL_ADC_DEC_256 | HAL_ADC_CHN_TEMP);
+   \   000014   75B62E       MOV       0xb6,#0x2e
+     19            while( !ADCIF );
+   \                     ??readTemp_0:
+   \   000017   A28D         MOV       C,0x88.5
+   \   000019   50FC         JNC       ??readTemp_0
+     20            ADCIF         = 0;
+   \   00001B   C28D         CLR       0x88.5
+     21            value         = ADCL;
+   \   00001D   E5BA         MOV       A,0xba+0x0
+     22            value        |= ((uint16) ADCH) << 8;
+     23            value       >>= 4;
+   \   00001F   A9BB         MOV       R1,0xbb
+   \   000021   F5..         MOV       ?V0,A
+   \   000023   E9           MOV       A,R1
+   \   000024   F5..         MOV       ?V1,A
+   \   000026   7404         MOV       A,#0x4
+   \   000028   78..         MOV       R0,#?V0
+   \   00002A   12....       LCALL     ?US_SHR
+   \   00002D   AA..         MOV       R2,?V0
+   \   00002F   AB..         MOV       R3,?V1
+     24            
+     25            if(bCalibrate)
+   \   000031   90....       MOV       DPTR,#??bCalibrate
+   \   000034   E0           MOVX      A,@DPTR
+   \   000035   600D         JZ        ??readTemp_1
+     26            {
+     27              reference_voltage=value;
+   \   000037   90....       MOV       DPTR,#??reference_voltage
+   \   00003A   EA           MOV       A,R2
+   \   00003B   F0           MOVX      @DPTR,A
+   \   00003C   A3           INC       DPTR
+   \   00003D   EB           MOV       A,R3
+   \   00003E   F0           MOVX      @DPTR,A
+     28              bCalibrate = FALSE;
+   \   00003F   90....       MOV       DPTR,#??bCalibrate
+   \   000042   E4           CLR       A
+   \   000043   F0           MOVX      @DPTR,A
+     29            }
+     30            temp = 22 + ((value - reference_voltage)/4);
+     31            return temp;
+   \                     ??readTemp_1:
+   \   000044   90....       MOV       DPTR,#??reference_voltage
+   \   000047   E0           MOVX      A,@DPTR
+   \   000048   F8           MOV       R0,A
+   \   000049   A3           INC       DPTR
+   \   00004A   E0           MOVX      A,@DPTR
+   \   00004B   F9           MOV       R1,A
+   \   00004C   EA           MOV       A,R2
+   \   00004D   C3           CLR       C
+   \   00004E   98           SUBB      A,R0
+   \   00004F   F5..         MOV       ?V0,A
+   \   000051   EB           MOV       A,R3
+   \   000052   99           SUBB      A,R1
+   \   000053   F5..         MOV       ?V1,A
+   \   000055   7402         MOV       A,#0x2
+   \   000057   78..         MOV       R0,#?V0
+   \   000059   12....       LCALL     ?US_SHR
+   \   00005C   E5..         MOV       A,?V0
+   \   00005E   2416         ADD       A,#0x16
+   \   000060   F9           MOV       R1,A
+   \   000061   7F02         MOV       R7,#0x2
+   \   000063   02....       LJMP      ?BANKED_LEAVE_XDATA
+   \   000066                REQUIRE _A_TCON
+   \   000066                REQUIRE ADCCON3
+   \   000066                REQUIRE ADCL
+   \   000066                REQUIRE ADCH
+     32          }
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+   \                     ??reference_voltage:
+   \   000000                DS 2
+   \   000002                REQUIRE __INIT_XDATA_Z
+
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+   \                     ??bCalibrate:
+   \   000000                DS 1
+   \   000001                REQUIRE `?<Initializer for bCalibrate>`
+   \   000001                REQUIRE __INIT_XDATA_I
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for bCalibrate>`:
+   \   000000   01           DB 1
+
+   \                                 In  segment BANK_RELAYS, align 1
+   \                     `??readTemp::?relay`:
+   \   000000   12....       LCALL   ?BDISPATCH
+   \   000003   ......       DC24    readTemp
+
+   Maximum stack usage in bytes:
+
+   XSTACK Function
+   ------ --------
+     10   readTemp
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       1  ?<Initializer for bCalibrate>
+       1  ADCCON3
+       1  ADCH
+       1  ADCL
+       1  _A_TCON
+       1  bCalibrate
+     102  readTemp
+       6  readTemp::?relay
+       2  reference_voltage
+
+ 
+ 102 bytes in segment BANKED_CODE
+   6 bytes in segment BANK_RELAYS
+   4 bytes in segment SFR_AN
+   1 byte  in segment XDATA_I
+   1 byte  in segment XDATA_ID
+   2 bytes in segment XDATA_Z
+ 
+   7 bytes of CODE     memory
+   0 bytes of DATA     memory (+ 4 bytes shared)
+ 102 bytes of HUGECODE memory
+   3 bytes of XDATA    memory
+
+Errors: none
+Warnings: none
