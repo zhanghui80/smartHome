@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"E:\IAR\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.general.xcl" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.driver.xcl" 
+"E:\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.general.xcl" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"E:\IAR\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.general.xcl" "--debug_file=%~1" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.driver.xcl" 
+"E:\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.general.xcl" "--debug_file=%~1" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.EndDeviceEB.driver.xcl" 
 
 @echo off 
 :end

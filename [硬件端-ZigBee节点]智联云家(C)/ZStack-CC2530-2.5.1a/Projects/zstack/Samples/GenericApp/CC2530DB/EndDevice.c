@@ -20,6 +20,11 @@
 
 #define SEND_DATA_EVENT 0X01
 
+//#define Drinking 1
+#define Curtain  1
+//#define Light_D  1
+//#define AirConditioning 1
+
 #define Light                   P1_0
 #define CurtainOFF              P1_0
 #define CurtainON               P1_1
@@ -97,7 +102,7 @@ void GenericApp_Init( uint8 task_id )
   P1DIR                                |= 0x07;
   
   DataInit();
-  HomeInit(3);
+  HomeInit(2);
   /***初始化串口***/
   uartConfig.configured         = TRUE;
   uartConfig.baudRate           = HAL_UART_BR_9600;
@@ -191,7 +196,7 @@ UINT16 GenericApp_ProcessEvent( byte task_id, UINT16 events )
 
 static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
 {
-/*
+#ifdef AirConditioning
  unsigned char airConditioning[5];
   int tp;
   
@@ -214,7 +219,8 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       Air_conditioner_off(0);
       AF_DataPack.AirConditioning[1] = '0';
     }
-  }*/
+  }
+#elif Drinking
   //饮水机饮水机饮水机饮水机饮水机饮水机
   unsigned char Drinking_Fountain[6];
   switch (pkt -> clusterId)
@@ -234,16 +240,17 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       HalLedSet(HAL_LED_1,HAL_LED_MODE_ON);
     }
   }
-  /*窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘
+#elif Curtain
+  //窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘窗帘
   unsigned char curtain[2];
   switch (pkt -> clusterId)
   {
   case GENERICAPP_CLUSTERID:
     osal_memcpy(curtain,pkt->cmd.Data,2);
-    if(curtain[1] == '1')
+    if(curtain[1] == '0')
     {
       CurtainON = 1;
-      AF_DataPack.CurtainStatus[1] = '1';
+      AF_DataPack.CurtainStatus[1] = '0';
       HalLedSet(HAL_LED_1,HAL_LED_MODE_OFF);
     }
     if(curtain[1] == '2')
@@ -252,15 +259,16 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       AF_DataPack.CurtainStatus[1] = '2';
       HalLedSet(HAL_LED_1,HAL_LED_MODE_OFF);
     }
-    if(curtain[1] == '0')
+    if(curtain[1] == '1')
     {
       CurtainOFF = 1;
       CurtainON = 0;
-      AF_DataPack.CurtainStatus[1] = '0';
+      AF_DataPack.CurtainStatus[1] = '1';
       HalLedSet(HAL_LED_1,HAL_LED_MODE_ON);
     }
-  }*/
-  /*灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯
+  }
+#elif Light_D
+  //灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯灯
   unsigned char light[1];
   switch (pkt -> clusterId)
   {
@@ -278,7 +286,8 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
       AF_DataPack.LightStatus[1] = '0';
       HalLedSet(HAL_LED_1,HAL_LED_MODE_ON);
     }
-  }*/
+  }
+#endif
   
 }
 
@@ -289,6 +298,15 @@ void GenericApp_SendTheMessage( void )
   my_DstAddr.addrMode = (afAddrMode_t)Addr16Bit;
   my_DstAddr.endPoint = GENERICAPP_ENDPOINT;
   my_DstAddr.addr.shortAddr = 0X0000;
+#ifdef Curtain
+  AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,
+                  GENERICAPP_CLUSTERID,
+                  sizeof(AF_DataPack.CurtainStatus),            //对应模块发个自对应的数据包中所属的部分
+                  (uint8*)&AF_DataPack.CurtainStatus,
+                  &GenericApp_TransID,
+                  AF_DISCV_ROUTE,
+                  AF_DEFAULT_RADIUS );
+#elif Drinking
   AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,
                   GENERICAPP_CLUSTERID,
                   sizeof(AF_DataPack.DrinkingFountainStatus),            //对应模块发个自对应的数据包中所属的部分
@@ -296,7 +314,23 @@ void GenericApp_SendTheMessage( void )
                   &GenericApp_TransID,
                   AF_DISCV_ROUTE,
                   AF_DEFAULT_RADIUS );
-
+#elif Light_D
+  AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,
+                  GENERICAPP_CLUSTERID,
+                  sizeof(AF_DataPack.LightStatus),            //对应模块发个自对应的数据包中所属的部分
+                  (uint8*)&AF_DataPack.LightStatus,
+                  &GenericApp_TransID,
+                  AF_DISCV_ROUTE,
+                  AF_DEFAULT_RADIUS );
+#elif AirConditioning
+   AF_DataRequest( &my_DstAddr, &GenericApp_epDesc,
+                  GENERICAPP_CLUSTERID,
+                  sizeof(AF_DataPack.AirConditioning),            //对应模块发个自对应的数据包中所属的部分
+                  (uint8*)&AF_DataPack.AirConditioning,
+                  &GenericApp_TransID,
+                  AF_DISCV_ROUTE,
+                  AF_DEFAULT_RADIUS );
+#endif
 }
 
 

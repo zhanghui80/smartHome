@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "E:\IAR\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.general.xcl" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.driver.xcl" 
+& "E:\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.general.xcl" --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.driver.xcl" 
 }
 else
 {
-& "E:\IAR\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.general.xcl" --debug_file=$debugfile --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.driver.xcl" 
+& "E:\Embedded Workbench 8.0\common\bin\cspybat" -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.general.xcl" --debug_file=$debugfile --backend -f "D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\settings\GenericApp.CoordinatorEB.driver.xcl" 
 }

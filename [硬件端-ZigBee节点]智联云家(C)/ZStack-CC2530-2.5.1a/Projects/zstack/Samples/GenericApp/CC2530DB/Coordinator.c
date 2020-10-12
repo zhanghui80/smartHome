@@ -6,6 +6,7 @@
 #include <string.h>
 #include "Coordinator.h"
 #include "DebugTrace.h"
+#include <stdio.h>
 
 #if !defined( WIN32 )
   #include "OnBoard.h"
@@ -42,14 +43,16 @@ const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
   
 typedef struct DataPack
 {
- unsigned char username[5];                     //ÓÃ»§Ãû£ºMaker 
- unsigned char password[6];                     //ÃÜÂë£º116114
+ //unsigned char username[5];                     //ÓÃ»§Ãû£ºMaker 
+ //unsigned char password[6];                     //ÃÜÂë£º116114
  unsigned char LightStatus;
  unsigned char CurtainStatus;                    //´°Á±ÉèÖÃËÄµµ  1 2 3 4 
- unsigned char AirConditioning[3];                  //¿Õµ÷¿ª¹Ø¼°µ÷ÎÂ
+ //unsigned char AirConditioning[3];                  //¿Õµ÷¿ª¹Ø¼°µ÷ÎÂ
  unsigned char DrinkingFountainStatus;
  unsigned char endl; 
 }DataPack;
+
+char UART_Buff[16];
 
 endPointDesc_t GenericApp_epDesc;
 byte GenericApp_TaskID; 
@@ -64,7 +67,7 @@ void DataProcessing(unsigned char AF_Data[4]);
 void DataInit(void);
 /***ÓÃ»§×Ô¶¨Òå±ä(³£)Á¿Çø***/
 unsigned char cache[128];
-unsigned char AF_DataPack[7];
+unsigned char AF_DataPack[7] = "000000";
 DataPack UART_DataPack;
 char This_username[] = "Maker";
 char This_password[] = "116114";
@@ -94,21 +97,13 @@ void GenericApp_Init(byte task_id)
 
 void DataInit(void)
 {
-  for(int i=0;i<5;i++)
-  {
-    UART_DataPack.username[i] = This_username[i];
-  }
-  
-  for(int j=0;j<6;j++)
-  {
-    UART_DataPack.password[j] = This_password[j];
-  }
+
   UART_DataPack.LightStatus = '0';
   UART_DataPack.CurtainStatus = '0';
   UART_DataPack.DrinkingFountainStatus = '0';
-  UART_DataPack.AirConditioning[0] = '0';
-  UART_DataPack.AirConditioning[1] = '0';
-  UART_DataPack.AirConditioning[2] = '0';
+  //UART_DataPack.AirConditioning[0] = '0';
+  //UART_DataPack.AirConditioning[1] = '0';
+  //UART_DataPack.AirConditioning[2] = '0';
   UART_DataPack.endl = 'b';
 }
 
@@ -155,7 +150,7 @@ static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
   case GENERICAPP_CLUSTERID:
     osal_memcpy(&AF_Data,pkt->cmd.Data,sizeof(AF_Data));
     DataProcessing(AF_Data); 
-    HalUARTWrite(0,(uint8*)&UART_DataPack,sizeof(UART_DataPack));
+    HalUARTWrite(0,(uint8*)&UART_Buff,sizeof(UART_Buff));
    // delay(40000);
    // osal_start48_timerEx(GenericApp_TaskID,UART_RX_CB_EVT,1000);
     
@@ -177,20 +172,23 @@ void DataProcessing(unsigned char AF_Data[4])                //¶ÔÖÕ¶Ë½Úµã´«À´µÄÊ
   if(AF_Data[0] == '1')
   {
     UART_DataPack.LightStatus = AF_Data[1];
+    sprintf(UART_Buff,"$Light,%c,0b",UART_DataPack.LightStatus);
   }
   if(AF_Data[0] == '2')
   {
     UART_DataPack.CurtainStatus = AF_Data[1];
+    sprintf(UART_Buff,"$Curtain,%c,0b",UART_DataPack.CurtainStatus);
   }
-  if(AF_Data[0] == '3')
-  {
-    UART_DataPack.AirConditioning[0] = AF_Data[1];
-    UART_DataPack.AirConditioning[1] = AF_Data[2];
-    UART_DataPack.AirConditioning[2] = AF_Data[3];
-  }
+//  if(AF_Data[0] == '3')
+//  {
+//    UART_DataPack.AirConditioning[0] = AF_Data[1];
+//    UART_DataPack.AirConditioning[1] = AF_Data[2];
+//    UART_DataPack.AirConditioning[2] = AF_Data[3];
+//  }
   if(AF_Data[0] == '4')
   {
     UART_DataPack.DrinkingFountainStatus = AF_Data[1];
+    sprintf(UART_Buff,"$Drinking,%c,0b",UART_DataPack.DrinkingFountainStatus);
   }
 }
 
@@ -211,7 +209,7 @@ static void GenericApp_SendTheMessage(void)
                        AF_DEFAULT_RADIUS );
 }
 
-                                                                                                               
+ /*                                                                                                              
 static void rxCB(uint8 port,uint8 event)     //port ¶Ë¿Ú   ²ÉÓÃ´®¿Ú¡®0¡¯
 {
    HalUARTRead(0,cache,17);
@@ -228,7 +226,32 @@ static void rxCB(uint8 port,uint8 event)     //port ¶Ë¿Ú   ²ÉÓÃ´®¿Ú¡®0¡¯
    }
 
 }
+*/
 
+static void rxCB(uint8 port,uint8 event)     //port ¶Ë¿Ú   ²ÉÓÃ´®¿Ú¡®0¡¯
+{
+   HalUARTRead(0,cache,2);
+   int flag = 1;
+   if(flag == 1)
+   {
+     if(cache[0] == 'C')     //µ±½ÓÊÕµ½µÄÖ¸Áî¿ªÍ·ÎªC£¬¼´¿ØÖÆ´°Á±£¬½«Æä¿ØÖÆÂë¸³Öµ¸ø¹ã²¥Êý¾Ý°ü´°Á±µÄÎ»
+     {
+       AF_DataPack[1] = cache[1];
+     }
+     if(cache[0] == 'D')     
+     {
+       AF_DataPack[5] = cache[1];
+     }
+     if(cache[0] == 'L')     
+     {
+       AF_DataPack[0] = cache[1];
+     }
+     GenericApp_SendTheMessage();
+     HalLedBlink(HAL_LED_2,0,50,500);
+     flag = 0;
+   }
+
+}
 void delay(long i)
 {
   while(i--);

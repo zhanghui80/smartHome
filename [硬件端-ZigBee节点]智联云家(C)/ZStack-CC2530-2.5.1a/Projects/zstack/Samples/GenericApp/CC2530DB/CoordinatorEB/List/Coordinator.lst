@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR C/C++ Compiler V10.20.1.5333 for 8051               23/Dec/2019  15:34:08
+# IAR C/C++ Compiler V10.20.1.5333 for 8051               11/Oct/2020  11:56:30
 # Copyright 2004-2018 IAR Systems AB.
 # PC-locked license - IAR Embedded Workbench for 8051
 #
@@ -14,7 +14,7 @@
 #    Source file        =  
 #        D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.c
 #    Command line       =  
-#        -f C:\Users\17245\AppData\Local\Temp\EW7DE7.tmp
+#        -f C:\Users\17245\AppData\Local\Temp\EWCF74.tmp
 #        (D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.c
 #        -D ZTOOL_P1 -D MT_TASK -D MT_SYS_FUNC -D MT_ZDO_FUNC -D
 #        LCD_SUPPORTED=DEBUG -D HAL_UART=TRUE -lC
@@ -105,33 +105,34 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
       6          #include <string.h>
       7          #include "Coordinator.h"
       8          #include "DebugTrace.h"
-      9          
-     10          #if !defined( WIN32 )
-     11            #include "OnBoard.h"
-     12          #endif
-     13          
-     14          /* HAL */
-     15          #include "hal_lcd.h"
-     16          #include "hal_led.h"
-     17          #include "hal_key.h"
-     18          #include "hal_uart.h"
-     19          
-     20          #define SEND_TO_ALL_EVENT       0X01
-     21          #define UART_TX_EVENT          0X0001
-     22          
+      9          #include <stdio.h>
+     10          
+     11          #if !defined( WIN32 )
+     12            #include "OnBoard.h"
+     13          #endif
+     14          
+     15          /* HAL */
+     16          #include "hal_lcd.h"
+     17          #include "hal_led.h"
+     18          #include "hal_key.h"
+     19          #include "hal_uart.h"
+     20          
+     21          #define SEND_TO_ALL_EVENT       0X01
+     22          #define UART_TX_EVENT          0X0001
      23          
+     24          
 
    \                                 In  segment XDATA_ROM_C, align 1
-     24          const cId_t GenericApp_ClusterList[GENERICAPP_MAX_CLUSTERS] =
+     25          const cId_t GenericApp_ClusterList[GENERICAPP_MAX_CLUSTERS] =
    \                     GenericApp_ClusterList:
    \   000000   0100         DW 1
-     25          {
-     26            GENERICAPP_CLUSTERID
-     27          };
-     28          
+     26          {
+     27            GENERICAPP_CLUSTERID
+     28          };
+     29          
 
    \                                 In  segment XDATA_ROM_C, align 1
-     29          const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
+     30          const SimpleDescriptionFormat_t GenericApp_SimpleDesc =
    \                     GenericApp_SimpleDesc:
    \   000000   0A           DB 10
    \   000001   040F         DW 3844
@@ -141,102 +142,110 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000007   ....         DW GenericApp_ClusterList
    \   000009   00           DB 0
    \   00000A   0000         DW 0H
-     30          {
-     31            GENERICAPP_ENDPOINT,              //  int Endpoint;
-     32            GENERICAPP_PROFID,                //  uint16 AppProfId[2];
-     33            GENERICAPP_DEVICEID,              //  uint16 AppDeviceId[2];
-     34            GENERICAPP_DEVICE_VERSION,        //  int   AppDevVer:4;
-     35            GENERICAPP_FLAGS,                 //  int   AppFlags:4;
-     36            GENERICAPP_MAX_CLUSTERS,          //  byte  AppNumInClusters;
-     37            (cId_t *)GenericApp_ClusterList,  //  byte *pAppInClusterList;
-     38            0,
-     39            (cId_t *)NULL
-     40          };
-     41          
-     42            
-     43          typedef struct DataPack
-     44          {
-     45           unsigned char username[5];                     //用户名：Maker 
-     46           unsigned char password[6];                     //密码：116114
-     47           unsigned char LightStatus;
-     48           unsigned char CurtainStatus;                    //窗帘设置四档  1 2 3 4 
-     49           unsigned char AirConditioning[3];                  //空调开关及调温
-     50           unsigned char DrinkingFountainStatus;
-     51           unsigned char endl; 
-     52          }DataPack;
-     53          
+     31          {
+     32            GENERICAPP_ENDPOINT,              //  int Endpoint;
+     33            GENERICAPP_PROFID,                //  uint16 AppProfId[2];
+     34            GENERICAPP_DEVICEID,              //  uint16 AppDeviceId[2];
+     35            GENERICAPP_DEVICE_VERSION,        //  int   AppDevVer:4;
+     36            GENERICAPP_FLAGS,                 //  int   AppFlags:4;
+     37            GENERICAPP_MAX_CLUSTERS,          //  byte  AppNumInClusters;
+     38            (cId_t *)GenericApp_ClusterList,  //  byte *pAppInClusterList;
+     39            0,
+     40            (cId_t *)NULL
+     41          };
+     42          
+     43            
+     44          typedef struct DataPack
+     45          {
+     46           //unsigned char username[5];                     //用户名：Maker 
+     47           //unsigned char password[6];                     //密码：116114
+     48           unsigned char LightStatus;
+     49           unsigned char CurtainStatus;                    //窗帘设置四档  1 2 3 4 
+     50           //unsigned char AirConditioning[3];                  //空调开关及调温
+     51           unsigned char DrinkingFountainStatus;
+     52           unsigned char endl; 
+     53          }DataPack;
+     54          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     54          endPointDesc_t GenericApp_epDesc;
+     55          char UART_Buff[16];
+   \                     UART_Buff:
+   \   000000                DS 16
+   \   000010                REQUIRE __INIT_XDATA_Z
+     56          
+
+   \                                 In  segment XDATA_Z, align 1, keep-with-next
+     57          endPointDesc_t GenericApp_epDesc;
    \                     GenericApp_epDesc:
    \   000000                DS 6
    \   000006                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     55          byte GenericApp_TaskID; 
+     58          byte GenericApp_TaskID; 
    \                     GenericApp_TaskID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     56          byte GenericApp_TransID;
+     59          byte GenericApp_TransID;
    \                     GenericApp_TransID:
    \   000000                DS 1
    \   000001                REQUIRE __INIT_XDATA_Z
-     57          
+     60          
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     58          unsigned char *reply;
+     61          unsigned char *reply;
    \                     reply:
    \   000000                DS 2
    \   000002                REQUIRE __INIT_XDATA_Z
-     59          void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
-     60          void GenericApp_SendTheMessage(void);
-     61          void delay(long);
-     62          static void rxCB(uint8 port,uint8 event);
-     63          void DataProcessing(unsigned char AF_Data[4]);
-     64          void DataInit(void);
-     65          /***用户自定义变(常)量区***/
+     62          void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pckt );
+     63          void GenericApp_SendTheMessage(void);
+     64          void delay(long);
+     65          static void rxCB(uint8 port,uint8 event);
+     66          void DataProcessing(unsigned char AF_Data[4]);
+     67          void DataInit(void);
+     68          /***用户自定义变(常)量区***/
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     66          unsigned char cache[128];
+     69          unsigned char cache[128];
    \                     cache:
    \   000000                DS 128
    \   000080                REQUIRE __INIT_XDATA_Z
 
-   \                                 In  segment XDATA_Z, align 1, keep-with-next
-     67          unsigned char AF_DataPack[7];
+   \                                 In  segment XDATA_I, align 1, keep-with-next
+     70          unsigned char AF_DataPack[7] = "000000";
    \                     AF_DataPack:
    \   000000                DS 7
-   \   000007                REQUIRE __INIT_XDATA_Z
+   \   000007                REQUIRE `?<Initializer for AF_DataPack>`
+   \   000007                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_Z, align 1, keep-with-next
-     68          DataPack UART_DataPack;
+     71          DataPack UART_DataPack;
    \                     UART_DataPack:
-   \   000000                DS 18
-   \   000012                REQUIRE __INIT_XDATA_Z
+   \   000000                DS 4
+   \   000004                REQUIRE __INIT_XDATA_Z
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-     69          char This_username[] = "Maker";
+     72          char This_username[] = "Maker";
    \                     This_username:
    \   000000                DS 6
    \   000006                REQUIRE `?<Initializer for This_username>`
    \   000006                REQUIRE __INIT_XDATA_I
 
    \                                 In  segment XDATA_I, align 1, keep-with-next
-     70          char This_password[] = "116114";
+     73          char This_password[] = "116114";
    \                     This_password:
    \   000000                DS 7
    \   000007                REQUIRE `?<Initializer for This_password>`
    \   000007                REQUIRE __INIT_XDATA_I
-     71          
-     72          /**************************/
-     73          
+     74          
+     75          /**************************/
+     76          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     74          void GenericApp_Init(byte task_id)
+     77          void GenericApp_Init(byte task_id)
    \                     GenericApp_Init:
-     75          {
+     78          {
    \   000000   74F7         MOV       A,#-0x9
    \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
    \   000005                ; Saved register size: 9
@@ -244,62 +253,62 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000005   74E3         MOV       A,#-0x1d
    \   000007   12....       LCALL     ?ALLOC_XSTACK8
    \   00000A   E9           MOV       A,R1
-     76            halUARTCfg_t uartConfig;             //串口配置 halUARTCfg_t 为结构体
-     77            GenericApp_TaskID             = task_id;
+     79            halUARTCfg_t uartConfig;             //串口配置 halUARTCfg_t 为结构体
+     80            GenericApp_TaskID             = task_id;
    \   00000B   90....       MOV       DPTR,#GenericApp_TaskID
    \   00000E   F0           MOVX      @DPTR,A
-     78            GenericApp_TransID            = 0;
+     81            GenericApp_TransID            = 0;
    \   00000F   90....       MOV       DPTR,#GenericApp_TransID
    \   000012   E4           CLR       A
    \   000013   F0           MOVX      @DPTR,A
-     79            GenericApp_epDesc.endPoint    = GENERICAPP_ENDPOINT;
+     82            GenericApp_epDesc.endPoint    = GENERICAPP_ENDPOINT;
    \   000014   90....       MOV       DPTR,#GenericApp_epDesc
    \   000017   740A         MOV       A,#0xa
    \   000019   F0           MOVX      @DPTR,A
-     80            GenericApp_epDesc.task_id     = &GenericApp_TaskID;
+     83            GenericApp_epDesc.task_id     = &GenericApp_TaskID;
    \   00001A   A3           INC       DPTR
    \   00001B   74..         MOV       A,#GenericApp_TaskID & 0xff
    \   00001D   F0           MOVX      @DPTR,A
    \   00001E   A3           INC       DPTR
    \   00001F   74..         MOV       A,#(GenericApp_TaskID >> 8) & 0xff
    \   000021   F0           MOVX      @DPTR,A
-     81            GenericApp_epDesc.simpleDesc  = 
-     82                  (SimpleDescriptionFormat_t *)&GenericApp_SimpleDesc;
+     84            GenericApp_epDesc.simpleDesc  = 
+     85                  (SimpleDescriptionFormat_t *)&GenericApp_SimpleDesc;
    \   000022   A3           INC       DPTR
    \   000023   74..         MOV       A,#GenericApp_SimpleDesc & 0xff
    \   000025   F0           MOVX      @DPTR,A
    \   000026   A3           INC       DPTR
    \   000027   74..         MOV       A,#(GenericApp_SimpleDesc >> 8) & 0xff
    \   000029   F0           MOVX      @DPTR,A
-     83            GenericApp_epDesc.latencyReq  = noLatencyReqs;
+     86            GenericApp_epDesc.latencyReq  = noLatencyReqs;
    \   00002A   A3           INC       DPTR
    \   00002B   E4           CLR       A
    \   00002C   F0           MOVX      @DPTR,A
-     84            afRegister(&GenericApp_epDesc);
+     87            afRegister(&GenericApp_epDesc);
    \   00002D                ; Setup parameters for call to function afRegister
    \   00002D   7A..         MOV       R2,#GenericApp_epDesc & 0xff
    \   00002F   7B..         MOV       R3,#(GenericApp_epDesc >> 8) & 0xff
    \   000031   12....       LCALL     `??afRegister::?relay`; Banked call to: afRegister
-     85            
-     86            DataInit();
+     88            
+     89            DataInit();
    \   000034                ; Setup parameters for call to function DataInit
    \   000034   12....       LCALL     `??DataInit::?relay`; Banked call to: DataInit
-     87            
-     88            uartConfig.configured         = TRUE;
+     90            
+     91            uartConfig.configured         = TRUE;
    \   000037   85..82       MOV       DPL,?XSP + 0
    \   00003A   85..83       MOV       DPH,?XSP + 1
    \   00003D   7401         MOV       A,#0x1
    \   00003F   F0           MOVX      @DPTR,A
-     89            uartConfig.baudRate           = HAL_UART_BR_115200;
+     92            uartConfig.baudRate           = HAL_UART_BR_115200;
    \   000040   12....       LCALL     ?XSTACK_DISP0_8
    \   000043   7404         MOV       A,#0x4
    \   000045   F0           MOVX      @DPTR,A
-     90            uartConfig.flowControl        = FALSE;
+     93            uartConfig.flowControl        = FALSE;
    \   000046   7402         MOV       A,#0x2
    \   000048   12....       LCALL     ?XSTACK_DISP0_8
    \   00004B   E4           CLR       A
    \   00004C   F0           MOVX      @DPTR,A
-     91            uartConfig.callBackFunc       = rxCB;
+     94            uartConfig.callBackFunc       = rxCB;
    \   00004D   741B         MOV       A,#0x1b
    \   00004F   12....       LCALL     ?XSTACK_DISP0_8
    \   000052   74..         MOV       A,#`??rxCB::?relay` & 0xff
@@ -307,141 +316,55 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000055   A3           INC       DPTR
    \   000056   74..         MOV       A,#(`??rxCB::?relay` >> 8) & 0xff
    \   000058   F0           MOVX      @DPTR,A
-     92            HalUARTOpen (0,&uartConfig);
+     95            HalUARTOpen (0,&uartConfig);
    \   000059                ; Setup parameters for call to function HalUARTOpen
    \   000059   AA..         MOV       R2,?XSP + 0
    \   00005B   AB..         MOV       R3,?XSP + 1
    \   00005D   7900         MOV       R1,#0x0
    \   00005F   12....       LCALL     `??HalUARTOpen::?relay`; Banked call to: HalUARTOpen
-     93          }
+     96          }
    \   000062   741D         MOV       A,#0x1d
    \   000064   12....       LCALL     ?DEALLOC_XSTACK8
    \   000067   7F01         MOV       R7,#0x1
    \   000069   02....       LJMP      ?BANKED_LEAVE_XDATA
-     94          
+     97          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-     95          void DataInit(void)
+     98          void DataInit(void)
    \                     DataInit:
-     96          {
+     99          {
    \   000000   C082         PUSH      DPL
    \   000002   C083         PUSH      DPH
    \   000004                ; Saved register size: 2
    \   000004                ; Auto size: 0
-     97            for(int i=0;i<5;i++)
-   \   000004   7800         MOV       R0,#0x0
-   \   000006   7900         MOV       R1,#0x0
-     98            {
-     99              UART_DataPack.username[i] = This_username[i];
-   \                     ??DataInit_0:
-   \   000008   74..         MOV       A,#This_username & 0xff
-   \   00000A   28           ADD       A,R0
-   \   00000B   F582         MOV       DPL,A
-   \   00000D   74..         MOV       A,#(This_username >> 8) & 0xff
-   \   00000F   39           ADDC      A,R1
-   \   000010   F583         MOV       DPH,A
-   \   000012   E0           MOVX      A,@DPTR
-   \   000013   C0E0         PUSH      A
-   \   000015   74..         MOV       A,#UART_DataPack & 0xff
-   \   000017   28           ADD       A,R0
-   \   000018   F582         MOV       DPL,A
-   \   00001A   74..         MOV       A,#(UART_DataPack >> 8) & 0xff
-   \   00001C   39           ADDC      A,R1
-   \   00001D   F583         MOV       DPH,A
-   \   00001F   D0E0         POP       A
-   \   000021   F0           MOVX      @DPTR,A
-    100            }
-   \   000022   08           INC       R0
-   \   000023   E8           MOV       A,R0
-   \   000024   7001         JNZ       ??DataInit_1
-   \   000026   09           INC       R1
-   \                     ??DataInit_1:
-   \   000027   C3           CLR       C
-   \   000028   9405         SUBB      A,#0x5
-   \   00002A   12....       LCALL     ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_0:
-   \   00002D   40D9         JC        ??DataInit_0
-    101            
-    102            for(int j=0;j<6;j++)
-   \   00002F   7800         MOV       R0,#0x0
-   \   000031   7900         MOV       R1,#0x0
-    103            {
-    104              UART_DataPack.password[j] = This_password[j];
-   \                     ??DataInit_2:
-   \   000033   74..         MOV       A,#This_password & 0xff
-   \   000035   28           ADD       A,R0
-   \   000036   F582         MOV       DPL,A
-   \   000038   74..         MOV       A,#(This_password >> 8) & 0xff
-   \   00003A   39           ADDC      A,R1
-   \   00003B   F583         MOV       DPH,A
-   \   00003D   E0           MOVX      A,@DPTR
-   \   00003E   C0E0         PUSH      A
-   \   000040   74..         MOV       A,#(UART_DataPack + 5) & 0xff
-   \   000042   28           ADD       A,R0
-   \   000043   F582         MOV       DPL,A
-   \   000045   74..         MOV       A,#((UART_DataPack + 5) >> 8) & 0xff
-   \   000047   39           ADDC      A,R1
-   \   000048   F583         MOV       DPH,A
-   \   00004A   D0E0         POP       A
-   \   00004C   F0           MOVX      @DPTR,A
-    105            }
-   \   00004D   08           INC       R0
-   \   00004E   E8           MOV       A,R0
-   \   00004F   7001         JNZ       ??DataInit_3
-   \   000051   09           INC       R1
-   \                     ??DataInit_3:
-   \   000052   C3           CLR       C
-   \   000053   9406         SUBB      A,#0x6
-   \   000055   12....       LCALL     ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_1:
-   \   000058   40D9         JC        ??DataInit_2
-    106            UART_DataPack.LightStatus = '0';
-   \   00005A   90....       MOV       DPTR,#UART_DataPack + 11
-   \   00005D   7430         MOV       A,#0x30
-   \   00005F   F0           MOVX      @DPTR,A
-    107            UART_DataPack.CurtainStatus = '0';
-   \   000060   A3           INC       DPTR
-   \   000061   F0           MOVX      @DPTR,A
-    108            UART_DataPack.DrinkingFountainStatus = '0';
-   \   000062   90....       MOV       DPTR,#UART_DataPack + 16
-   \   000065   F0           MOVX      @DPTR,A
-    109            UART_DataPack.AirConditioning[0] = '0';
-   \   000066   90....       MOV       DPTR,#UART_DataPack + 13
-   \   000069   F0           MOVX      @DPTR,A
-    110            UART_DataPack.AirConditioning[1] = '0';
-   \   00006A   A3           INC       DPTR
-   \   00006B   F0           MOVX      @DPTR,A
-    111            UART_DataPack.AirConditioning[2] = '0';
-   \   00006C   A3           INC       DPTR
-   \   00006D   F0           MOVX      @DPTR,A
-    112            UART_DataPack.endl = 'b';
-   \   00006E   90....       MOV       DPTR,#UART_DataPack + 17
-   \   000071   7462         MOV       A,#0x62
-   \   000073   F0           MOVX      @DPTR,A
-    113          }
-   \   000074                REQUIRE ?Subroutine0
-   \   000074                ; // Fall through to label ?Subroutine0
+    100          
+    101            UART_DataPack.LightStatus = '0';
+   \   000004   90....       MOV       DPTR,#UART_DataPack
+   \   000007   7430         MOV       A,#0x30
+   \   000009   F0           MOVX      @DPTR,A
+    102            UART_DataPack.CurtainStatus = '0';
+   \   00000A   A3           INC       DPTR
+   \   00000B   F0           MOVX      @DPTR,A
+    103            UART_DataPack.DrinkingFountainStatus = '0';
+   \   00000C   A3           INC       DPTR
+   \   00000D   F0           MOVX      @DPTR,A
+    104            //UART_DataPack.AirConditioning[0] = '0';
+    105            //UART_DataPack.AirConditioning[1] = '0';
+    106            //UART_DataPack.AirConditioning[2] = '0';
+    107            UART_DataPack.endl = 'b';
+   \   00000E   A3           INC       DPTR
+   \   00000F   7462         MOV       A,#0x62
+   \   000011   F0           MOVX      @DPTR,A
+    108          }
+   \   000012   D083         POP       DPH
+   \   000014   D082         POP       DPL
+   \   000016   02....       LJMP      ?BRET
+    109          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine0:
-   \   000000   D083         POP       DPH
-   \   000002   D082         POP       DPL
-   \   000004   02....       LJMP      ?BRET
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-   \                     ?Subroutine1:
-   \   000000   E9           MOV       A,R1
-   \   000001   9400         SUBB      A,#0x0
-   \   000003   A2D2         MOV       C,0xD0 /* PSW */.2
-   \   000005   65D0         XRL       A,PSW
-   \   000007   33           RLC       A
-   \   000008   22           RET
-    114          
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    115          UINT16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
+    110          UINT16 GenericApp_ProcessEvent( uint8 task_id, uint16 events )
    \                     GenericApp_ProcessEvent:
-    116          {
+    111          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
    \   000000                REQUIRE ?V2
@@ -455,27 +378,27 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000007   12....       LCALL     ?ALLOC_XSTACK8
    \   00000A   8A..         MOV       ?V4,R2
    \   00000C   8B..         MOV       ?V5,R3
-    117            afIncomingMSGPacket_t *MSGpkt;
-    118            if ( events & SYS_EVENT_MSG )
+    112            afIncomingMSGPacket_t *MSGpkt;
+    113            if ( events & SYS_EVENT_MSG )
    \   00000E   EB           MOV       A,R3
    \   00000F   5480         ANL       A,#0x80
    \   000011   6079         JZ        ??GenericApp_ProcessEvent_0
-    119            {
-    120              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );
+    114            {
+    115              MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );
    \   000013                ; Setup parameters for call to function osal_msg_receive
    \   000013   805A         SJMP      ??GenericApp_ProcessEvent_1
-    121              while ( MSGpkt )
-    122              {
-    123                switch ( MSGpkt->hdr.event )
+    116              while ( MSGpkt )
+    117              {
+    118                switch ( MSGpkt->hdr.event )
    \                     ??GenericApp_ProcessEvent_2:
    \   000015   8E82         MOV       DPL,R6
    \   000017   8F83         MOV       DPH,R7
    \   000019   E0           MOVX      A,@DPTR
    \   00001A   641A         XRL       A,#0x1a
    \   00001C   704A         JNZ       ??GenericApp_ProcessEvent_3
-    124                {
-    125                  case AF_INCOMING_MSG_CMD:
-    126                    GenericApp_MessageMSGCB( MSGpkt );
+    119                {
+    120                  case AF_INCOMING_MSG_CMD:
+    121                    GenericApp_MessageMSGCB( MSGpkt );
    \   00001E   A3           INC       DPTR
    \   00001F   A3           INC       DPTR
    \   000020   A3           INC       DPTR
@@ -514,19 +437,19 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000056   AB..         MOV       R3,?XSP + 1
    \   000058   12....       LCALL     `??DataProcessing::?relay`; Banked call to: DataProcessing
    \   00005B                ; Setup parameters for call to function HalUARTWrite
-   \   00005B   7C12         MOV       R4,#0x12
+   \   00005B   7C10         MOV       R4,#0x10
    \   00005D   7D00         MOV       R5,#0x0
-   \   00005F   7A..         MOV       R2,#UART_DataPack & 0xff
-   \   000061   7B..         MOV       R3,#(UART_DataPack >> 8) & 0xff
+   \   00005F   7A..         MOV       R2,#UART_Buff & 0xff
+   \   000061   7B..         MOV       R3,#(UART_Buff >> 8) & 0xff
    \   000063   7900         MOV       R1,#0x0
    \   000065   12....       LCALL     `??HalUARTWrite::?relay`; Banked call to: HalUARTWrite
-    127                    break;
-    128                  default: 
-    129                    break;
-    130                }
-    131          
-    132                // Release the memory
-    133                osal_msg_deallocate( (uint8 *)MSGpkt );
+    122                    break;
+    123                  default: 
+    124                    break;
+    125                }
+    126          
+    127                // Release the memory
+    128                osal_msg_deallocate( (uint8 *)MSGpkt );
    \                     ??GenericApp_ProcessEvent_3:
    \   000068                ; Setup parameters for call to function osal_msg_deallocate
    \   000068   EE           MOV       A,R6
@@ -534,9 +457,9 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   00006A   EF           MOV       A,R7
    \   00006B   FB           MOV       R3,A
    \   00006C   12....       LCALL     `??osal_msg_deallocate::?relay`; Banked call to: osal_msg_deallocate
-    134          
-    135                // Next
-    136                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );
+    129          
+    130                // Next
+    131                MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );
    \   00006F                ; Setup parameters for call to function osal_msg_receive
    \                     ??GenericApp_ProcessEvent_1:
    \   00006F   90....       MOV       DPTR,#GenericApp_TaskID
@@ -547,23 +470,23 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000079   8B..         MOV       ?V1,R3
    \   00007B   AE..         MOV       R6,?V0
    \   00007D   AF..         MOV       R7,?V1
-    137              }
+    132              }
    \   00007F   EE           MOV       A,R6
    \   000080   4F           ORL       A,R7
    \   000081   7092         JNZ       ??GenericApp_ProcessEvent_2
-    138          
-    139              // return unprocessed events
-    140              return (events ^ SYS_EVENT_MSG);
+    133          
+    134              // return unprocessed events
+    135              return (events ^ SYS_EVENT_MSG);
    \   000083   AA..         MOV       R2,?V4
    \   000085   E5..         MOV       A,?V5
    \   000087   6480         XRL       A,#0x80
    \   000089   FB           MOV       R3,A
    \   00008A   8004         SJMP      ??GenericApp_ProcessEvent_5
-    141            }
-    142           
-    143          
-    144            // Discard unknown events
-    145            return 0;
+    136            }
+    137           
+    138          
+    139            // Discard unknown events
+    140            return 0;
    \                     ??GenericApp_ProcessEvent_0:
    \   00008C   7A00         MOV       R2,#0x0
    \   00008E   7B00         MOV       R3,#0x0
@@ -572,278 +495,308 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000092   12....       LCALL     ?DEALLOC_XSTACK8
    \   000095   7F06         MOV       R7,#0x6
    \   000097   02....       LJMP      ?BANKED_LEAVE_XDATA
-    146          }
-    147          
-    148          
-    149          
-    150          static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
-    151          {
-    152            unsigned char AF_Data[4];
-    153            switch  (pkt -> clusterId)
-    154            {
-    155            case GENERICAPP_CLUSTERID:
-    156              osal_memcpy(&AF_Data,pkt->cmd.Data,sizeof(AF_Data));
-    157              DataProcessing(AF_Data); 
-    158              HalUARTWrite(0,(uint8*)&UART_DataPack,sizeof(UART_DataPack));
-    159             // delay(40000);
-    160             // osal_start48_timerEx(GenericApp_TaskID,UART_RX_CB_EVT,1000);
-    161              
-    162              break;
-    163            }
-    164          /*
-    165              
-    166            switch ( pkt->clusterId )
-    167            {
-    168              case GENERICAPP_CLUSTERID:
-    169                osal_memcpy(&temperature,pkt->cmd.Data,sizeof(temperature));
-    170                HalUARTWrite(0,(uint8*)&temperature,sizeof(temperature)-1);
-    171              break;
-    172            }*/
-    173          }
-    174          
+    141          }
+    142          
+    143          
+    144          
+    145          static void GenericApp_MessageMSGCB( afIncomingMSGPacket_t *pkt )
+    146          {
+    147            unsigned char AF_Data[4];
+    148            switch  (pkt -> clusterId)
+    149            {
+    150            case GENERICAPP_CLUSTERID:
+    151              osal_memcpy(&AF_Data,pkt->cmd.Data,sizeof(AF_Data));
+    152              DataProcessing(AF_Data); 
+    153              HalUARTWrite(0,(uint8*)&UART_Buff,sizeof(UART_Buff));
+    154             // delay(40000);
+    155             // osal_start48_timerEx(GenericApp_TaskID,UART_RX_CB_EVT,1000);
+    156              
+    157              break;
+    158            }
+    159          /*
+    160              
+    161            switch ( pkt->clusterId )
+    162            {
+    163              case GENERICAPP_CLUSTERID:
+    164                osal_memcpy(&temperature,pkt->cmd.Data,sizeof(temperature));
+    165                HalUARTWrite(0,(uint8*)&temperature,sizeof(temperature)-1);
+    166              break;
+    167            }*/
+    168          }
+    169          
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    175          void DataProcessing(unsigned char AF_Data[4])                //对终端节点传来的数据进行处理
+    170          void DataProcessing(unsigned char AF_Data[4])                //对终端节点传来的数据进行处理
    \                     DataProcessing:
-    176          {
-   \   000000   C082         PUSH      DPL
-   \   000002   C083         PUSH      DPH
-   \   000004                ; Saved register size: 2
-   \   000004                ; Auto size: 0
-    177            if(AF_Data[0] == '1')
-   \   000004   8A82         MOV       DPL,R2
-   \   000006   8B83         MOV       DPH,R3
-   \   000008   E0           MOVX      A,@DPTR
-   \   000009   6431         XRL       A,#0x31
-   \   00000B   7006         JNZ       ??DataProcessing_0
-    178            {
-    179              UART_DataPack.LightStatus = AF_Data[1];
-   \   00000D   A3           INC       DPTR
-   \   00000E   E0           MOVX      A,@DPTR
-   \   00000F   90....       MOV       DPTR,#UART_DataPack + 11
-   \   000012   F0           MOVX      @DPTR,A
-    180            }
-    181            if(AF_Data[0] == '2')
-   \                     ??DataProcessing_0:
-   \   000013   8A82         MOV       DPL,R2
-   \   000015   8B83         MOV       DPH,R3
-   \   000017   E0           MOVX      A,@DPTR
-   \   000018   6432         XRL       A,#0x32
-   \   00001A   7006         JNZ       ??DataProcessing_1
-    182            {
-    183              UART_DataPack.CurtainStatus = AF_Data[1];
-   \   00001C   A3           INC       DPTR
-   \   00001D   E0           MOVX      A,@DPTR
-   \   00001E   90....       MOV       DPTR,#UART_DataPack + 12
-   \   000021   F0           MOVX      @DPTR,A
-    184            }
-    185            if(AF_Data[0] == '3')
-   \                     ??DataProcessing_1:
-   \   000022   8A82         MOV       DPL,R2
-   \   000024   8B83         MOV       DPH,R3
-   \   000026   E0           MOVX      A,@DPTR
-   \   000027   6433         XRL       A,#0x33
-   \   000029   701D         JNZ       ??DataProcessing_2
-    186            {
-    187              UART_DataPack.AirConditioning[0] = AF_Data[1];
-   \   00002B   A3           INC       DPTR
-   \   00002C   E0           MOVX      A,@DPTR
-   \   00002D   90....       MOV       DPTR,#UART_DataPack + 13
-   \   000030   F0           MOVX      @DPTR,A
-    188              UART_DataPack.AirConditioning[1] = AF_Data[2];
-   \   000031   8A82         MOV       DPL,R2
-   \   000033   8B83         MOV       DPH,R3
-   \   000035   A3           INC       DPTR
-   \   000036   A3           INC       DPTR
-   \   000037   E0           MOVX      A,@DPTR
-   \   000038   90....       MOV       DPTR,#UART_DataPack + 14
-   \   00003B   F0           MOVX      @DPTR,A
-    189              UART_DataPack.AirConditioning[2] = AF_Data[3];
-   \   00003C   8A82         MOV       DPL,R2
-   \   00003E   8B83         MOV       DPH,R3
-   \   000040   A3           INC       DPTR
-   \   000041   A3           INC       DPTR
-   \   000042   A3           INC       DPTR
-   \   000043   E0           MOVX      A,@DPTR
-   \   000044   90....       MOV       DPTR,#UART_DataPack + 15
-   \   000047   F0           MOVX      @DPTR,A
-    190            }
-    191            if(AF_Data[0] == '4')
-   \                     ??DataProcessing_2:
-   \   000048   8A82         MOV       DPL,R2
-   \   00004A   8B83         MOV       DPH,R3
-   \   00004C   E0           MOVX      A,@DPTR
-   \   00004D   6434         XRL       A,#0x34
-   \   00004F   7006         JNZ       ??DataProcessing_3
-    192            {
-    193              UART_DataPack.DrinkingFountainStatus = AF_Data[1];
-   \   000051   A3           INC       DPTR
-   \   000052   E0           MOVX      A,@DPTR
-   \   000053   90....       MOV       DPTR,#UART_DataPack + 16
-   \   000056   F0           MOVX      @DPTR,A
-    194            }
-    195          }
-   \                     ??DataProcessing_3:
-   \   000057   02....       LJMP      ?Subroutine0 & 0xFFFF
-    196          
-    197          
-    198          static void GenericApp_SendTheMessage(void)
-    199          {
-    200            afAddrType_t my_DstAddr;
-    201            my_DstAddr.addrMode = (afAddrMode_t)AddrBroadcast;
-    202            my_DstAddr.endPoint = GENERICAPP_ENDPOINT;
-    203            my_DstAddr.addr.shortAddr = 0XFFFF;
-    204            AF_DataRequest(      &my_DstAddr,
-    205                                 &GenericApp_epDesc,
-    206                                 GENERICAPP_CLUSTERID,
-    207                                 7,
-    208                                 AF_DataPack,
-    209                                 &GenericApp_TransID,
-    210                                 AF_DISCV_ROUTE,
-    211                                 AF_DEFAULT_RADIUS );
-    212          }
-    213          
-    214                                                                                                                         
-
-   \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    215          static void rxCB(uint8 port,uint8 event)     //port 端口   采用串口‘0’
-   \                     rxCB:
-    216          {
+    171          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
-   \   000000                REQUIRE ?V2
-   \   000000   74F5         MOV       A,#-0xb
+   \   000000   74F6         MOV       A,#-0xa
    \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
-   \   000005                ; Saved register size: 11
+   \   000005                ; Saved register size: 10
+   \   000005                ; Auto size: 0
+   \   000005   EA           MOV       A,R2
+   \   000006   FE           MOV       R6,A
+   \   000007   EB           MOV       A,R3
+   \   000008   FF           MOV       R7,A
+    172            if(AF_Data[0] == '1')
+   \   000009   8A82         MOV       DPL,R2
+   \   00000B   F583         MOV       DPH,A
+   \   00000D   E0           MOVX      A,@DPTR
+   \   00000E   6431         XRL       A,#0x31
+   \   000010   701B         JNZ       ??DataProcessing_0
+    173            {
+    174              UART_DataPack.LightStatus = AF_Data[1];
+   \   000012   A3           INC       DPTR
+   \   000013   E0           MOVX      A,@DPTR
+   \   000014   90....       MOV       DPTR,#UART_DataPack
+   \   000017   12....       LCALL     ?Subroutine1 & 0xFFFF
+    175              sprintf(UART_Buff,"$Light,%c,0b",UART_DataPack.LightStatus);
+    176            }
+   \                     ??CrossCallReturnLabel_0:
+   \   00001A   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   00001D   7C..         MOV       R4,#`?<Constant "$Light,%c,0b">` & 0xff
+   \   00001F   7D..         MOV       R5,#(`?<Constant "$Light,%c,0b">` >> 8) & 0xff
+   \   000021   7A..         MOV       R2,#UART_Buff & 0xff
+   \   000023   7B..         MOV       R3,#(UART_Buff >> 8) & 0xff
+   \   000025   12....       LCALL     `??sprintf::?relay`; Banked call to: sprintf
+   \   000028   7402         MOV       A,#0x2
+   \   00002A   12....       LCALL     ?DEALLOC_XSTACK8
+    177            if(AF_Data[0] == '2')
+   \                     ??DataProcessing_0:
+   \   00002D   8E82         MOV       DPL,R6
+   \   00002F   8F83         MOV       DPH,R7
+   \   000031   E0           MOVX      A,@DPTR
+   \   000032   6432         XRL       A,#0x32
+   \   000034   701B         JNZ       ??DataProcessing_1
+    178            {
+    179              UART_DataPack.CurtainStatus = AF_Data[1];
+   \   000036   A3           INC       DPTR
+   \   000037   E0           MOVX      A,@DPTR
+   \   000038   90....       MOV       DPTR,#UART_DataPack + 1
+   \   00003B   12....       LCALL     ?Subroutine1 & 0xFFFF
+    180              sprintf(UART_Buff,"$Curtain,%c,0b",UART_DataPack.CurtainStatus);
+    181            }
+   \                     ??CrossCallReturnLabel_1:
+   \   00003E   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   000041   7C..         MOV       R4,#`?<Constant "$Curtain,%c,0b">` & 0xff
+   \   000043   7D..         MOV       R5,#(`?<Constant "$Curtain,%c,0b">` >> 8) & 0xff
+   \   000045   7A..         MOV       R2,#UART_Buff & 0xff
+   \   000047   7B..         MOV       R3,#(UART_Buff >> 8) & 0xff
+   \   000049   12....       LCALL     `??sprintf::?relay`; Banked call to: sprintf
+   \   00004C   7402         MOV       A,#0x2
+   \   00004E   12....       LCALL     ?DEALLOC_XSTACK8
+    182          //  if(AF_Data[0] == '3')
+    183          //  {
+    184          //    UART_DataPack.AirConditioning[0] = AF_Data[1];
+    185          //    UART_DataPack.AirConditioning[1] = AF_Data[2];
+    186          //    UART_DataPack.AirConditioning[2] = AF_Data[3];
+    187          //  }
+    188            if(AF_Data[0] == '4')
+   \                     ??DataProcessing_1:
+   \   000051   8E82         MOV       DPL,R6
+   \   000053   8F83         MOV       DPH,R7
+   \   000055   E0           MOVX      A,@DPTR
+   \   000056   6434         XRL       A,#0x34
+   \   000058   701B         JNZ       ??DataProcessing_2
+    189            {
+    190              UART_DataPack.DrinkingFountainStatus = AF_Data[1];
+   \   00005A   A3           INC       DPTR
+   \   00005B   E0           MOVX      A,@DPTR
+   \   00005C   90....       MOV       DPTR,#UART_DataPack + 2
+   \   00005F   12....       LCALL     ?Subroutine1 & 0xFFFF
+    191              sprintf(UART_Buff,"$Drinking,%c,0b",UART_DataPack.DrinkingFountainStatus);
+    192            }
+   \                     ??CrossCallReturnLabel_2:
+   \   000062   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   000065   7C..         MOV       R4,#`?<Constant "$Drinking,%c,0b">` & 0xff
+   \   000067   7D..         MOV       R5,#(`?<Constant "$Drinking,%c,0b">` >> 8) & 0xff
+   \   000069   7A..         MOV       R2,#UART_Buff & 0xff
+   \   00006B   7B..         MOV       R3,#(UART_Buff >> 8) & 0xff
+   \   00006D   12....       LCALL     `??sprintf::?relay`; Banked call to: sprintf
+   \   000070   7402         MOV       A,#0x2
+   \   000072   12....       LCALL     ?DEALLOC_XSTACK8
+    193          }
+   \                     ??DataProcessing_2:
+   \   000075                REQUIRE ?Subroutine0
+   \   000075                ; // Fall through to label ?Subroutine0
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine0:
+   \   000000   7F02         MOV       R7,#0x2
+   \   000002   02....       LJMP      ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+   \                     ?Subroutine1:
+   \   000000   F0           MOVX      @DPTR,A
+   \   000001                ; Setup parameters for call to function sprintf
+   \   000001                ; Setup parameters for call to function sprintf
+   \   000001                ; Setup parameters for call to function sprintf
+   \   000001   F5..         MOV       ?V0,A
+   \   000003   75..00       MOV       ?V1,#0x0
+   \   000006   78..         MOV       R0,#?V0
+   \   000008   22           RET
+    194          
+    195          
+    196          static void GenericApp_SendTheMessage(void)
+    197          {
+    198            afAddrType_t my_DstAddr;
+    199            my_DstAddr.addrMode = (afAddrMode_t)AddrBroadcast;
+    200            my_DstAddr.endPoint = GENERICAPP_ENDPOINT;
+    201            my_DstAddr.addr.shortAddr = 0XFFFF;
+    202            AF_DataRequest(      &my_DstAddr,
+    203                                 &GenericApp_epDesc,
+    204                                 GENERICAPP_CLUSTERID,
+    205                                 7,
+    206                                 AF_DataPack,
+    207                                 &GenericApp_TransID,
+    208                                 AF_DISCV_ROUTE,
+    209                                 AF_DEFAULT_RADIUS );
+    210          }
+    211          
+    212           /*                                                                                                              
+    213          static void rxCB(uint8 port,uint8 event)     //port 端口   采用串口‘0’
+    214          {
+    215             HalUARTRead(0,cache,17);
+    216             int flag = 1;
+    217             if(osal_memcmp(cache,"Maker116114",11) && flag == 1)
+    218             {
+    219               for(int i=0;i<7;i++)
+    220               {
+    221                  AF_DataPack[i] = cache[i+11];
+    222               }
+    223               GenericApp_SendTheMessage();
+    224               HalLedBlink(HAL_LED_2,0,50,500);
+    225               flag = 0;
+    226             }
+    227          
+    228          }
+    229          */
+    230          
+
+   \                                 In  segment BANKED_CODE, align 1, keep-with-next
+    231          static void rxCB(uint8 port,uint8 event)     //port 端口   采用串口‘0’
+   \                     rxCB:
+    232          {
+   \   000000                REQUIRE ?V0
+   \   000000                REQUIRE ?V1
+   \   000000   74F6         MOV       A,#-0xa
+   \   000002   12....       LCALL     ?BANKED_ENTER_XDATA
+   \   000005                ; Saved register size: 10
    \   000005                ; Auto size: 12
    \   000005   74F4         MOV       A,#-0xc
    \   000007   12....       LCALL     ?ALLOC_XSTACK8
-    217             HalUARTRead(0,cache,17);
+    233             HalUARTRead(0,cache,2);
    \   00000A                ; Setup parameters for call to function HalUARTRead
-   \   00000A   7C11         MOV       R4,#0x11
+   \   00000A   7C02         MOV       R4,#0x2
    \   00000C   7D00         MOV       R5,#0x0
    \   00000E   7A..         MOV       R2,#cache & 0xff
    \   000010   7B..         MOV       R3,#(cache >> 8) & 0xff
    \   000012   7900         MOV       R1,#0x0
    \   000014   12....       LCALL     `??HalUARTRead::?relay`; Banked call to: HalUARTRead
-    218             int flag = 1;
-    219             if(osal_memcmp(cache,"Maker116114",11) && flag == 1)
-   \   000017                ; Setup parameters for call to function osal_memcmp
-   \   000017   75....       MOV       ?V0,#`?<Constant "Maker116114">` & 0xff
-   \   00001A   75....       MOV       ?V1,#(`?<Constant "Maker116114">` >> 8) & 0xff
-   \   00001D   75..00       MOV       ?V2,#0x0
-   \   000020   78..         MOV       R0,#?V0
-   \   000022   12....       LCALL     ?PUSH_XSTACK_I_THREE
-   \   000025   7C0B         MOV       R4,#0xb
-   \   000027   7D00         MOV       R5,#0x0
-   \   000029   79..         MOV       R1,#cache & 0xff
-   \   00002B   7A..         MOV       R2,#(cache >> 8) & 0xff
-   \   00002D   7B00         MOV       R3,#0x0
-   \   00002F   12....       LCALL     `??osal_memcmp::?relay`; Banked call to: osal_memcmp
-   \   000032   7403         MOV       A,#0x3
-   \   000034   12....       LCALL     ?DEALLOC_XSTACK8
-   \   000037   E9           MOV       A,R1
-   \   000038   7003         JNZ       $+5
-   \   00003A   02....       LJMP      ??rxCB_0 & 0xFFFF
-    220             {
-    221               for(int i=0;i<7;i++)
-   \   00003D   7800         MOV       R0,#0x0
-   \   00003F   7900         MOV       R1,#0x0
-    222               {
-    223                  AF_DataPack[i] = cache[i+11];
-   \                     ??rxCB_1:
-   \   000041   74..         MOV       A,#(cache + 11) & 0xff
-   \   000043   28           ADD       A,R0
-   \   000044   F582         MOV       DPL,A
-   \   000046   74..         MOV       A,#((cache + 11) >> 8) & 0xff
-   \   000048   39           ADDC      A,R1
-   \   000049   F583         MOV       DPH,A
-   \   00004B   E0           MOVX      A,@DPTR
-   \   00004C   C0E0         PUSH      A
-   \   00004E   74..         MOV       A,#AF_DataPack & 0xff
-   \   000050   28           ADD       A,R0
-   \   000051   F582         MOV       DPL,A
-   \   000053   74..         MOV       A,#(AF_DataPack >> 8) & 0xff
-   \   000055   39           ADDC      A,R1
-   \   000056   F583         MOV       DPH,A
-   \   000058   D0E0         POP       A
-   \   00005A   F0           MOVX      @DPTR,A
-    224               }
-   \   00005B   08           INC       R0
-   \   00005C   E8           MOV       A,R0
-   \   00005D   7001         JNZ       ??rxCB_2
-   \   00005F   09           INC       R1
-   \                     ??rxCB_2:
-   \   000060   C3           CLR       C
-   \   000061   9407         SUBB      A,#0x7
-   \   000063   12....       LCALL     ?Subroutine1 & 0xFFFF
-   \                     ??CrossCallReturnLabel_2:
-   \   000066   40D9         JC        ??rxCB_1
-    225               GenericApp_SendTheMessage();
-   \   000068   7408         MOV       A,#0x8
-   \   00006A   12....       LCALL     ?XSTACK_DISP0_8
-   \   00006D   740F         MOV       A,#0xf
-   \   00006F   F0           MOVX      @DPTR,A
-   \   000070   7409         MOV       A,#0x9
-   \   000072   12....       LCALL     ?XSTACK_DISP0_8
-   \   000075   740A         MOV       A,#0xa
-   \   000077   F0           MOVX      @DPTR,A
-   \   000078   85..82       MOV       DPL,?XSP + 0
-   \   00007B   85..83       MOV       DPH,?XSP + 1
-   \   00007E   74FF         MOV       A,#-0x1
-   \   000080   F0           MOVX      @DPTR,A
-   \   000081   A3           INC       DPTR
-   \   000082   F0           MOVX      @DPTR,A
-   \   000083                ; Setup parameters for call to function AF_DataRequest
-   \   000083   75..1E       MOV       ?V0,#0x1e
-   \   000086   78..         MOV       R0,#?V0
-   \   000088   12....       LCALL     ?PUSH_XSTACK_I_ONE
-   \   00008B   75....       MOV       ?V0,#GenericApp_TransID & 0xff
-   \   00008E   75....       MOV       ?V1,#(GenericApp_TransID >> 8) & 0xff
-   \   000091   78..         MOV       R0,#?V0
-   \   000093   12....       LCALL     ?PUSH_XSTACK_I_TWO
-   \   000096   75....       MOV       ?V0,#AF_DataPack & 0xff
-   \   000099   75....       MOV       ?V1,#(AF_DataPack >> 8) & 0xff
-   \   00009C   78..         MOV       R0,#?V0
-   \   00009E   12....       LCALL     ?PUSH_XSTACK_I_TWO
-   \   0000A1   75..07       MOV       ?V0,#0x7
-   \   0000A4   75..00       MOV       ?V1,#0x0
-   \   0000A7   78..         MOV       R0,#?V0
-   \   0000A9   12....       LCALL     ?PUSH_XSTACK_I_TWO
-   \   0000AC   75..01       MOV       ?V0,#0x1
-   \   0000AF   78..         MOV       R0,#?V0
-   \   0000B1   12....       LCALL     ?PUSH_XSTACK_I_TWO
-   \   0000B4   7920         MOV       R1,#0x20
-   \   0000B6   7C..         MOV       R4,#GenericApp_epDesc & 0xff
-   \   0000B8   7D..         MOV       R5,#(GenericApp_epDesc >> 8) & 0xff
-   \   0000BA   7409         MOV       A,#0x9
-   \   0000BC   12....       LCALL     ?XSTACK_DISP101_8
-   \   0000BF   12....       LCALL     `??AF_DataRequest::?relay`; Banked call to: AF_DataRequest
-   \   0000C2   7409         MOV       A,#0x9
-   \   0000C4   12....       LCALL     ?DEALLOC_XSTACK8
-    226               HalLedBlink(HAL_LED_2,0,50,500);
-   \   0000C7                ; Setup parameters for call to function HalLedBlink
-   \   0000C7   7CF4         MOV       R4,#-0xc
-   \   0000C9   7D01         MOV       R5,#0x1
-   \   0000CB   7B32         MOV       R3,#0x32
-   \   0000CD   7A00         MOV       R2,#0x0
-   \   0000CF   7902         MOV       R1,#0x2
-   \   0000D1   12....       LCALL     `??HalLedBlink::?relay`; Banked call to: HalLedBlink
-    227               flag = 0;
-    228             }
-    229          
-    230          }
+    234             int flag = 1;
+    235             if(flag == 1)
+    236             {
+    237               if(cache[0] == 'C')     //当接收到的指令开头为C，即控制窗帘，将其控制码赋值给广播数据包窗帘的位
+   \   000017   90....       MOV       DPTR,#cache
+   \   00001A   E0           MOVX      A,@DPTR
+   \   00001B   6443         XRL       A,#0x43
+   \   00001D   7007         JNZ       ??rxCB_0
+    238               {
+    239                 AF_DataPack[1] = cache[1];
+   \   00001F   A3           INC       DPTR
+   \   000020   E0           MOVX      A,@DPTR
+   \   000021   90....       MOV       DPTR,#AF_DataPack + 1
+   \   000024   8016         SJMP      ??rxCB_1
+    240               }
+    241               if(cache[0] == 'D')     
    \                     ??rxCB_0:
-   \   0000D4   740C         MOV       A,#0xc
-   \   0000D6   12....       LCALL     ?DEALLOC_XSTACK8
-   \   0000D9   7F03         MOV       R7,#0x3
-   \   0000DB   02....       LJMP      ?BANKED_LEAVE_XDATA
-    231          
+   \   000026   E0           MOVX      A,@DPTR
+   \   000027   6444         XRL       A,#0x44
+   \   000029   7007         JNZ       ??rxCB_2
+    242               {
+    243                 AF_DataPack[5] = cache[1];
+   \   00002B   A3           INC       DPTR
+   \   00002C   E0           MOVX      A,@DPTR
+   \   00002D   90....       MOV       DPTR,#AF_DataPack + 5
+   \   000030   800A         SJMP      ??rxCB_1
+    244               }
+    245               if(cache[0] == 'L')     
+   \                     ??rxCB_2:
+   \   000032   E0           MOVX      A,@DPTR
+   \   000033   644C         XRL       A,#0x4c
+   \   000035   7006         JNZ       ??rxCB_3
+    246               {
+    247                 AF_DataPack[0] = cache[1];
+   \   000037   A3           INC       DPTR
+   \   000038   E0           MOVX      A,@DPTR
+   \   000039   90....       MOV       DPTR,#AF_DataPack
+   \                     ??rxCB_1:
+   \   00003C   F0           MOVX      @DPTR,A
+    248               }
+    249               GenericApp_SendTheMessage();
+   \                     ??rxCB_3:
+   \   00003D   7408         MOV       A,#0x8
+   \   00003F   12....       LCALL     ?XSTACK_DISP0_8
+   \   000042   740F         MOV       A,#0xf
+   \   000044   F0           MOVX      @DPTR,A
+   \   000045   7409         MOV       A,#0x9
+   \   000047   12....       LCALL     ?XSTACK_DISP0_8
+   \   00004A   740A         MOV       A,#0xa
+   \   00004C   F0           MOVX      @DPTR,A
+   \   00004D   85..82       MOV       DPL,?XSP + 0
+   \   000050   85..83       MOV       DPH,?XSP + 1
+   \   000053   74FF         MOV       A,#-0x1
+   \   000055   F0           MOVX      @DPTR,A
+   \   000056   A3           INC       DPTR
+   \   000057   F0           MOVX      @DPTR,A
+   \   000058                ; Setup parameters for call to function AF_DataRequest
+   \   000058   75..1E       MOV       ?V0,#0x1e
+   \   00005B   78..         MOV       R0,#?V0
+   \   00005D   12....       LCALL     ?PUSH_XSTACK_I_ONE
+   \   000060   75....       MOV       ?V0,#GenericApp_TransID & 0xff
+   \   000063   75....       MOV       ?V1,#(GenericApp_TransID >> 8) & 0xff
+   \   000066   78..         MOV       R0,#?V0
+   \   000068   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   00006B   75....       MOV       ?V0,#AF_DataPack & 0xff
+   \   00006E   75....       MOV       ?V1,#(AF_DataPack >> 8) & 0xff
+   \   000071   78..         MOV       R0,#?V0
+   \   000073   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   000076   75..07       MOV       ?V0,#0x7
+   \   000079   75..00       MOV       ?V1,#0x0
+   \   00007C   78..         MOV       R0,#?V0
+   \   00007E   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   000081   75..01       MOV       ?V0,#0x1
+   \   000084   78..         MOV       R0,#?V0
+   \   000086   12....       LCALL     ?PUSH_XSTACK_I_TWO
+   \   000089   7920         MOV       R1,#0x20
+   \   00008B   7C..         MOV       R4,#GenericApp_epDesc & 0xff
+   \   00008D   7D..         MOV       R5,#(GenericApp_epDesc >> 8) & 0xff
+   \   00008F   7409         MOV       A,#0x9
+   \   000091   12....       LCALL     ?XSTACK_DISP101_8
+   \   000094   12....       LCALL     `??AF_DataRequest::?relay`; Banked call to: AF_DataRequest
+   \   000097   7409         MOV       A,#0x9
+   \   000099   12....       LCALL     ?DEALLOC_XSTACK8
+    250               HalLedBlink(HAL_LED_2,0,50,500);
+   \   00009C                ; Setup parameters for call to function HalLedBlink
+   \   00009C   7CF4         MOV       R4,#-0xc
+   \   00009E   7D01         MOV       R5,#0x1
+   \   0000A0   7B32         MOV       R3,#0x32
+   \   0000A2   7A00         MOV       R2,#0x0
+   \   0000A4   7902         MOV       R1,#0x2
+   \   0000A6   12....       LCALL     `??HalLedBlink::?relay`; Banked call to: HalLedBlink
+    251               flag = 0;
+    252             }
+    253          
+    254          }
+   \   0000A9   740C         MOV       A,#0xc
+   \   0000AB   12....       LCALL     ?DEALLOC_XSTACK8
+   \   0000AE   02....       LJMP      ?Subroutine0 & 0xFFFF
 
    \                                 In  segment BANKED_CODE, align 1, keep-with-next
-    232          void delay(long i)
+    255          void delay(long i)
    \                     delay:
-    233          {
+    256          {
    \   000000                REQUIRE ?V0
    \   000000                REQUIRE ?V1
    \   000000                REQUIRE ?V2
@@ -860,7 +813,7 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000007   8B..         MOV       ?V1,R3
    \   000009   8C..         MOV       ?V2,R4
    \   00000B   8D..         MOV       ?V3,R5
-    234            while(i--);
+    257            while(i--);
    \                     ??delay_0:
    \   00000D   85....       MOV       ?V4,?V0
    \   000010   85....       MOV       ?V5,?V1
@@ -874,9 +827,14 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000025   45..         ORL       A,?V6
    \   000027   45..         ORL       A,?V7
    \   000029   70E2         JNZ       ??delay_0
-    235          }
+    258          }
    \   00002B   7F08         MOV       R7,#0x8
    \   00002D   02....       LJMP      ?BANKED_LEAVE_XDATA
+
+   \                                 In  segment XDATA_ID, align 1, keep-with-next
+   \                     `?<Initializer for AF_DataPack>`:
+   \   000000   30303030     DB "000000"
+   \            303000  
 
    \                                 In  segment XDATA_ID, align 1, keep-with-next
    \                     `?<Initializer for This_username>`:
@@ -919,10 +877,25 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
    \   000003   ......       DC24    delay
 
    \                                 In  segment XDATA_ROM_C, align 1
-   \                     `?<Constant "Maker116114">`:
-   \   000000   4D616B65     DB "Maker116114"
-   \            72313136
-   \            31313400
+   \                     `?<Constant "$Light,%c,0b">`:
+   \   000000   244C6967     DB "$Light,%c,0b"
+   \            68742C25
+   \            632C3062
+   \            00      
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "$Curtain,%c,0b">`:
+   \   000000   24437572     DB "$Curtain,%c,0b"
+   \            7461696E
+   \            2C25632C
+   \            306200  
+
+   \                                 In  segment XDATA_ROM_C, align 1
+   \                     `?<Constant "$Drinking,%c,0b">`:
+   \   000000   24447269     DB "$Drinking,%c,0b"
+   \            6E6B696E
+   \            672C2563
+   \            2C306200
 
    \                                 In  segment XDATA_ROM_C, align 1
    \                     __Constant_ffffffff:
@@ -932,8 +905,9 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
 
    ISTACK XSTACK Function
    ------ ------ --------
-      3     38   DataInit
-      2     18   DataProcessing
+      2     38   DataInit
+      0     30   DataProcessing
+        0     12   -> sprintf
       0     38   GenericApp_Init
         0     38   -> DataInit
         0     38   -> HalUARTOpen
@@ -945,26 +919,28 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
         0     18   -> osal_msg_deallocate
         0     18   -> osal_msg_receive
       0     16   delay
-      1     32   rxCB
-        0     32   -> AF_DataRequest
-        0     23   -> HalLedBlink
-        0     23   -> HalUARTRead
-        0     26   -> osal_memcmp
+      0     31   rxCB
+        0     31   -> AF_DataRequest
+        0     22   -> HalLedBlink
+        0     22   -> HalUARTRead
 
 
    Segment part sizes:
 
    Bytes  Function/Label
    -----  --------------
-      12  ?<Constant "Maker116114">
+      15  ?<Constant "$Curtain,%c,0b">
+      16  ?<Constant "$Drinking,%c,0b">
+      13  ?<Constant "$Light,%c,0b">
+       7  ?<Initializer for AF_DataPack>
        7  ?<Initializer for This_password>
        6  ?<Initializer for This_username>
-       7  ?Subroutine0
+       5  ?Subroutine0
        9  ?Subroutine1
        7  AF_DataPack
-     116  DataInit
+      25  DataInit
        6  DataInit::?relay
-      90  DataProcessing
+     117  DataProcessing
        6  DataProcessing::?relay
        2  GenericApp_ClusterList
      108  GenericApp_Init
@@ -977,27 +953,28 @@ D:\ZStack-CC2530-2.5.1a\Projects\zstack\Samples\GenericApp\CC2530DB\Coordinator.
        6  GenericApp_epDesc
        7  This_password
        6  This_username
-      18  UART_DataPack
+      16  UART_Buff
+       4  UART_DataPack
        4  __Constant_ffffffff
      128  cache
       48  delay
        6  delay::?relay
        2  reply
-     222  rxCB
+     177  rxCB
        6  rxCB::?relay
 
  
- 754 bytes in segment BANKED_CODE
+ 643 bytes in segment BANKED_CODE
   36 bytes in segment BANK_RELAYS
-  13 bytes in segment XDATA_I
-  13 bytes in segment XDATA_ID
-  30 bytes in segment XDATA_ROM_C
- 163 bytes in segment XDATA_Z
+  20 bytes in segment XDATA_I
+  20 bytes in segment XDATA_ID
+  62 bytes in segment XDATA_ROM_C
+ 158 bytes in segment XDATA_Z
  
-  49 bytes of CODE     memory
-  26 bytes of CONST    memory (+ 4 bytes shared)
- 754 bytes of HUGECODE memory
- 176 bytes of XDATA    memory
+  56 bytes of CODE     memory
+  58 bytes of CONST    memory (+ 4 bytes shared)
+ 643 bytes of HUGECODE memory
+ 178 bytes of XDATA    memory
 
 Errors: none
 Warnings: none
