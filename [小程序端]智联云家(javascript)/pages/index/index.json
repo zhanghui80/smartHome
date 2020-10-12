@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "van-panel": "@vant/weapp/panel/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-switch": "@vant/weapp/switch/index"
+  }
+}

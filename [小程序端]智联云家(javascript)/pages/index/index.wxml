@@ -1,0 +1,123 @@
+<!-- index.wxml -->
+ <cu-custom bgColor="bg-gradual-pink">
+<view slot="content">大指挥家</view>
+</cu-custom>
+
+<!-- 轮播图 -->
+ <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+    <view class="swiper-item">
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </view>
+  </swiper-item>
+</swiper>
+
+<!-- 实验室温度和湿度 -->
+<van-row>
+  <van-col span="12">
+    <view class="air-card">
+      <view class="title">
+        温度
+      </view>
+      <view class="content">
+        <view class="icon temp">
+          <image style="height:80rpx;width:80rpx" mode="aspectFit" src="../../images/icon/temp.png"></image>
+        </view>
+        <view class="text temp">{{ temperature }}℃</view>
+      </view>
+    </view>
+  </van-col>
+   <van-col span="12">
+    <view class="air-card">
+      <view class="title">
+        湿度
+      </view>
+      <view class="content">
+        <view class="icon">
+          <image style="height:80rpx;width:80rpx" mode="aspectFit" src="../../images/icon/ice.png"></image>
+        </view>
+        <view class="text ice">{{ humidity }}%</view>
+      </view>
+    </view>
+  </van-col>
+</van-row>
+
+<!-- 空调控制 -->
+<view class="air-control-card air-card">
+  <view class="title">
+    空调
+  </view>
+  <view>
+    <van-row>
+      <van-col span="12">
+        <view class="content" style="height:150rpx">
+          <view class="icon control">
+            <image style="height:150rpx;width:130rpx" mode="aspectFit" src="../../images/icon/air.png"></image>
+          </view>
+          <view wx:if="{{air==0}}" class="text off">OFF</view>
+          <view wx:else class="text on">{{air}}℃</view>
+        </view>
+      </van-col>
+      <van-col span="12">
+        <view class="option">
+          <text class="status">开关:</text>
+          <van-switch
+            bind:change="onChange"
+            checked="{{ status }}"
+            active-color="#07c160"
+            inactive-color="#ee0a24"
+          />
+        </view>
+        <view class="option">
+          <text class="status">温度:</text>
+          <van-stepper min="16" max="30" wx:if="{{status}}" value="{{ air }}" bind:change="changeAirTemp" input-width="40px" button-size="40px" />
+          <van-stepper wx:else disabled value="{{ air}}" input-width="40px" button-size="40px" />
+        </view>
+      </van-col>
+    </van-row>
+  </view>
+</view>
+
+
+<!-- 门锁和窗帘 -->
+<van-row>
+  <van-col span="12">
+    <view class="nav-li bg-green" bindtap="openLock">
+      <view class="nav-title">开锁</view>
+      <view class="nav-name">open</view>
+      <text class='cuIcon-unlock'></text>
+    </view>
+  </van-col>
+   <van-col span="12">
+      <view class="nav-li bg-pink" bindtap="openCurtain">
+      <view class="nav-title">{{ curtain?'关窗帘':'开窗帘'}}</view>
+      <view class="nav-name">{{ curtain?'close':'open'}}</view>
+      <text class='cuIcon-shopfill'></text>
+    </view>
+  </van-col>
+</van-row>
+<van-row>
+  <van-col span="12">
+    <view class="nav-li bg-blue" bindtap="openDrink">
+      <view class="nav-title">{{ drink?'关饮水机':'开饮水机'}}</view>
+      <view class="nav-name">{{ drink?'close':'open'}}</view>
+      <text class='cuIcon-global'></text>
+    </view>
+  </van-col>
+    <van-col span="12">
+    <view class="nav-li bg-red" bindtap="openLight">
+      <view class="nav-title">{{ light?'关灯':'开灯'}}</view>
+      <view class="nav-name">{{ light?'close':'open'}}</view>
+      <text class='cuIcon-creative'></text>
+    </view>
+  </van-col>
+</van-row>
+<!-- <view class="cu-bar bg-white solid-bottom">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-green">实验室功能</text>
+      <text class="bg-green"></text>
+    </view>
+</view> -->
+
+<van-toast id="van-toast" />

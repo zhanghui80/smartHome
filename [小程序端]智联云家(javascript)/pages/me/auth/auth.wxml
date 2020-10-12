@@ -1,0 +1,25 @@
+<cu-custom bgColor="bg-yellow" isBack="{{true}}">
+  <view class="text-white" slot="backText">返回</view>
+  <view class="text-white" slot="content">身份认证</view>
+</cu-custom>
+<form>
+	<view class="cu-form-group margin-top">
+		<view class="title">姓名</view>
+		<input placeholder="你的真实姓名" bindinput="nameInput"></input>
+	</view>
+  <view class="cu-form-group">
+		<view class="title">授权码</view>
+		<input placeholder="输入你的授权码" bindinput="tokenInput"></input>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">所属小组</view>
+		<picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+			<view class="picker">
+				{{index?picker[index]:'请选择'}}
+			</view>
+		</picker>
+	</view>
+  <view class="flex solid-bottom padding justify-center">
+    <button bindtap="startAuth" class="cu-btn bg-yellow lg text-white">开始认证</button>
+  </view>
+</form>

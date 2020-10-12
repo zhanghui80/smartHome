@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/me/me",
+    "pages/me/auth/auth"
+  ],
+  "window": {
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "color": "#959394",
+    "selectedColor": "#d4237a",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/images/tab/index.png",
+        "selectedIconPath": "/images/tab/index-check.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "/images/tab/me.png",
+        "selectedIconPath": "/images/tab/me-check.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

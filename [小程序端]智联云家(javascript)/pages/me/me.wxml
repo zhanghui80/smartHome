@@ -1,0 +1,40 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <button class="cu-btn line-white lg" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+    <block wx:else>
+      <view class="cu-avatar round lg margin-left" style="background-image:url({{userInfo.avatarUrl}});">
+      </view>
+      <view class="text-xl margin-top-xs">{{userInfo.nickName}}</view>
+    </block>
+    <image src="https://img.xiaoyou66.com/images/2020/09/23/6tgr.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="cu-list menu  margin-top-xl margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <view class="content" bindtap="authUser">
+        <text class="cuIcon-vip text-yellow"></text>
+        <text class="text-grey">身份认证</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" bindtap="cocpyGithub">
+        <text class="cuIcon-github text-grey"></text>
+        <text class="text-grey">GitHub组织</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" bindtap="priceAuthor">
+        <text class="cuIcon-moneybag text-red"></text>
+        <text class="text-grey">赞赏支持</text>
+      </view>
+    </view>
+    <view class="cu-item arrow" bindtap="aboutAuthor">
+      <view class="content">
+        <text class="cuIcon-info text-green"></text>
+        <text class="text-grey">关于作者</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
