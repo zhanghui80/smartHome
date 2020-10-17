@@ -1,0 +1,141 @@
+C51 COMPILER V9.60.0.0   DHT111                                        10/10/2020 19:05:03 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE DHT111
+OBJECT MODULE PLACED IN DHT111.obj
+COMPILER INVOKED BY: D:\APP\Keil\C51\BIN\C51.EXE SRC\DHT111.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\SRC)
+                    - DEBUG OBJECTEXTEND PRINT(.\DHT111.lst) PAGEWIDTH(100) OBJECT(DHT111.obj)
+
+line level    source
+
+   1          #include "REG51.h"
+   2          #include "DHT111.h"
+   3          #include "oled.h"
+   4          
+   5          u8 Data_Receive[5];
+   6          
+   7          void Delay30us()//@12.000MHz
+   8          {
+   9   1              unsigned char i;
+  10   1              i=87;
+  11   1              while(--i);
+  12   1      }
+  13          
+  14          void Delay20ms()//@12.000MHz
+  15          {
+  16   1              unsigned char i,j,k;
+  17   1              i=1;
+  18   1              j=234;
+  19   1              k=113;
+  20   1              do
+  21   1              {
+  22   2                      do
+  23   2                      {
+  24   3                              while(--k);
+  25   3                      }while(--j);
+  26   2              }while(--i);
+  27   1      }
+  28          
+  29          /*延时1s的函数*/
+  30          void Delay1s()//@12.000MHz
+  31          {
+  32   1              unsigned char i,j,k;
+  33   1              i=46;
+  34   1              j=153;
+  35   1              k=245;
+  36   1              do
+  37   1              {
+  38   2                      do
+  39   2                      {
+  40   3                              while(--k);
+  41   3                      }while(--j);
+  42   2              }while(--i);
+  43   1      }
+  44          
+  45          void DHT_Collect(u32 *T)//温度采集函数
+  46          {
+  47   1              unsigned char i,j;//for循环变量
+  48   1              unsigned char t;//超时判断
+  49   1              unsigned char dat8=0;//一次读取的8位数据，需要读5次
+  50   1              unsigned int CheckValue=0;//校验和
+  51   1              
+  52   1              DHT=0;//主机发起始信号
+  53   1              Delay20ms();//主机拉低总线至少18ms
+  54   1              DHT=1;//主机拉高总线20~40us
+C51 COMPILER V9.60.0.0   DHT111                                        10/10/2020 19:05:03 PAGE 2   
+
+  55   1              Delay30us();
+  56   1              
+  57   1              t=80;//设置超时等待时间
+  58   1              while(DHT&&t--);//等待DHT11拉低总线
+  59   1              if(t==0)//超时
+  60   1              {
+  61   2                      DHT=1;
+  62   2              }
+  63   1              t=250;//设置超时等待时间
+  64   1              while(!DHT&&t--);//等待DHT11拉高总线
+  65   1              if(t==0)//超时
+  66   1              {
+  67   2                      DHT=1;
+  68   2              }
+  69   1              t=250;//设置超时等待时间
+  70   1              while(DHT&&t--);//等待DHT11拉低总线
+  71   1              if(t==0)//超时
+  72   1              {
+  73   2                      DHT=1;
+  74   2              }
+  75   1      
+  76   1              for(j=0;j<5;j++)//5次读取
+  77   1              {
+  78   2                      for(i=0;i<8;i++)//1次8个位
+  79   2                      {
+  80   3              //等待50us开始时隙
+  81   3                              t=150;//设置超时等待时间
+  82   3                              while(!DHT&&t--);//等待DHT11拉高总线
+  83   3                              if(t==0)//超时
+  84   3                              {
+  85   4                                      DHT=1;
+  86   4                              }
+  87   3                              t=0;//记录时间清零
+  88   3                              while(DHT&&++t);//等待并记录高电平持续时间
+  89   3                              dat8<<=1;
+  90   3                              if(t>30)//高电平持续时间较长(70us)
+  91   3                              dat8+=1;//传输值为1
+  92   3                      }
+  93   2                      Data_Receive[j]=dat8;
+  94   2              }
+  95   1              
+  96   1              Delay30us();//等待DHT11拉低50us
+  97   1              Delay30us();
+  98   1              DHT=1;
+  99   1      
+ 100   1              for(i=0;i<4;i++)
+ 101   1              {
+ 102   2                      CheckValue+=Data_Receive[i];//计算校验值
+ 103   2              }
+ 104   1              if((unsigned char)CheckValue==Data_Receive[4])//比对
+ 105   1              {
+ 106   2                      T[0]=Data_Receive[2]/10;
+ 107   2                      T[1]=Data_Receive[2]%10;
+ 108   2                      T[2]=Data_Receive[3]%10;
+ 109   2                      T[3]=Data_Receive[0]/10;
+ 110   2                      T[4]=Data_Receive[0]%10;
+ 111   2              }
+ 112   1      }
+ 113          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.60.0.0   DHT111                                        10/10/2020 19:05:03 PAGE 3   
+
+   CODE SIZE        =    302    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

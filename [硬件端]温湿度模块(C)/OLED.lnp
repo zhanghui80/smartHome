@@ -1,0 +1,9 @@
+"STARTUP.obj",
+"main.obj",
+"oled.obj",
+"DHT111.obj",
+"remote.obj",
+"wifi.obj" 
+TO "OLED" 
+PAGEWIDTH (100) 
+RAMSIZE(256) 
